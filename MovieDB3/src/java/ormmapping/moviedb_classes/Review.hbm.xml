@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidade do Minho
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="moviedb_classes.Review" table="Review" lazy="false">
+		<id name="id" column="Id" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="review" column="Review" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="sound_grade" column="Sound_grade" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="story_grade" column="Story_grade" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="direction_grade" column="Direction_grade" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="enjoyment_grade" column="Enjoyment_grade" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="overall_grade" column="Overall_grade" type="integer" length="10" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>
