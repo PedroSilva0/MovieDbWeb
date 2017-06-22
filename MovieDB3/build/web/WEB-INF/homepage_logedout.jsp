@@ -48,7 +48,7 @@
        <div class="navbar-collapse collapse">
           <form method="POST" action="Login_Register_Page_Servlet" class="navbar-form navbar-right" >
                <input type="submit" name="login" class="btn btn-default" value="Login">
-               <input type="submit" name=register" class="btn btn-default" value="Register">
+               <input type="submit" name="register" class="btn btn-default" value="Register">
           </form>
          <form class="navbar-form" id="search">
             <div class="form-group" style="display:inline;">

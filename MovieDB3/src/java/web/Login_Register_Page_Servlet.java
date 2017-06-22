@@ -32,6 +32,7 @@ public class Login_Register_Page_Servlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("login") != null) {
+            request.setAttribute("log_state", 1);
             request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/WEB-INF/Register_Page.jsp").forward(request, response);

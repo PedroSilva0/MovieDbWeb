@@ -7,6 +7,7 @@ package moviedb_classes;
 
 //import Beans.MovieBeanLocal;
 import beans.MovieBeanLocal;
+import beans.UserBeanLocal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +25,8 @@ import javax.naming.NamingException;
  * @author Utilizador
  */
 public class MovieDB {
+
+    static UserBeanLocal userBean = lookupUserBeanLocal();
 
     static MovieBeanLocal movieBean = lookupMovieBeanLocal();
 
@@ -100,6 +103,16 @@ public class MovieDB {
         return res;
     
     }
+    
+    public static int login(String user,String pass){
+        User u= userBean.get_user_by_username(user);
+        if(u!=null){
+            if(u.getPassword().equals(pass)){
+                return 1;
+            }
+        }
+        return -1; 
+    }
 
     private static MovieBeanLocal lookupMovieBeanLocal() {
         try {
@@ -107,6 +120,16 @@ public class MovieDB {
             return (MovieBeanLocal) c.lookup("java:global/MovieDB3/MovieBean!beans.MovieBeanLocal");
         } catch (NamingException ne) {
             System.out.println("Erro no bean");
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private static UserBeanLocal lookupUserBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (UserBeanLocal) c.lookup("java:global/MovieDB3/UserBean!beans.UserBeanLocal");
+        } catch (NamingException ne) {
+            System.out.println("erro no beans de user");
             throw new RuntimeException(ne);
         }
     }

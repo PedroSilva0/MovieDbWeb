@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import moviedb_classes.MovieDB;
 import moviedb_classes.User;
 import moviedb_classes.UserDAO;
 import org.orm.PersistentException;
@@ -39,28 +40,16 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
-            String user = request.getParameter("name");
+            String user = request.getParameter("username");
             String pwd = request.getParameter("password");
-            System.out.println("User: "+ user);
-            System.out.println("Password: "+pwd);
+            int login_state=MovieDB.login(user, pwd);
             
-            List<User> users = new ArrayList<User>();
-        try {
-            users = UserDAO.queryUser("username='"+user+"'","Username");
-            System.out.println(users.size());
-        } catch (PersistentException ex) {
-            System.out.println("Nao peguei no user");
-        }
-            System.out.println(users.size());
-            if(users.size()>0){
-                User u = users.get(0);
-                if(u.getPassword().equals(pwd)){
-                  request.setAttribute("user", u.getUsername());
-                  request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
-                }
-            }else{
-                request.setAttribute("user", "login falhado");
+            if(login_state==1){
+                request.setAttribute("user", user);
                 request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
+            }else{
+                request.setAttribute("log_state", -1);
+                request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
             }
             
     }
