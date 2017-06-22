@@ -151,7 +151,8 @@ public class MovieDB {
         new_user.setEmail(email);
         new_user.setPassword(pwd2);
         new_user.setUsername(user);
-        userBean.register_user(u);
+        
+        userBean.register_user(new_user);
         return 1;
     }
     
