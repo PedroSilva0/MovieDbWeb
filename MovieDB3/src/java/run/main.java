@@ -5,6 +5,7 @@
  */
 package run;
 
+import java.util.ArrayList;
 import java.util.List;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDAO;
@@ -19,6 +20,9 @@ import moviedb_classes.UserDAO;
 public class main {
 
     public static void main(String[] args) {
+        List<Movie> aux= new ArrayList<Movie>();
+        aux=MovieDB.list_all_movies();
+        System.out.println(aux.get(0).getTitle());
        /*List<Movie> r = MovieDB.list_all_movies();
        System.out.println(r.size());*/
     }

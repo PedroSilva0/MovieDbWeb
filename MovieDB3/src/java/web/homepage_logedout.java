@@ -15,17 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import moviedb_classes.Movie;
-import moviedb_classes.MovieDAO;
 import moviedb_classes.MovieDB;
-import moviedb_classes.MovieDB2PersistentManager;
-import org.orm.PersistentSession;
 
 /**
  *
  * @author Utilizador
  */
-@WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class Index extends HttpServlet {
+@WebServlet(name = "homepage_logedout", urlPatterns = {"/homepage_logedout"})
+public class homepage_logedout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +35,12 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         //To list all the entities, it is possible to use following code.
-        List<Movie> r = new ArrayList<Movie>();
         
+        //List<Movie> r = new ArrayList<Movie>();
         //System.out.println("entrei");
-        r= MovieDB.list_top_rated_movies();
-        
-        
-        request.setAttribute("movies", r);
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        
+        //r= MovieDB.list_all_movies();
+        //request.setAttribute("movies", r);
+        request.getRequestDispatcher("/WEB-INF/homepage_logedout.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

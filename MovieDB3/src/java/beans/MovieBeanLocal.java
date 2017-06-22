@@ -18,4 +18,8 @@ public interface MovieBeanLocal {
     String sayHello(String name);
     
     public List<Movie> list_all_movies();
+
+    public List<Movie> list_top_rated_movies();
+
+    public List<Movie> list_movies_by_year();
 }

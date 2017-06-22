@@ -7,25 +7,18 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import moviedb_classes.Movie;
-import moviedb_classes.MovieDAO;
-import moviedb_classes.MovieDB;
-import moviedb_classes.MovieDB2PersistentManager;
-import org.orm.PersistentSession;
 
 /**
  *
  * @author Utilizador
  */
-@WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class Index extends HttpServlet {
+@WebServlet(name = "Login_Register_Page_Servlet", urlPatterns = {"/Login_Register_Page_Servlet"})
+public class Login_Register_Page_Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,17 +31,16 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         //To list all the entities, it is possible to use following code.
-        List<Movie> r = new ArrayList<Movie>();
-        
-        //System.out.println("entrei");
-        r= MovieDB.list_top_rated_movies();
-        
-        
-        request.setAttribute("movies", r);
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        
+        if (request.getParameter("login") != null) {
+            request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/WEB-INF/Register_Page.jsp").forward(request, response);
+        }
     }
+
+        
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

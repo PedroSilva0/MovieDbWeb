@@ -28,19 +28,46 @@ public class MovieBean implements MovieBeanLocal {
 
     @Override
     public List<Movie> list_all_movies() {
-        System.out.println(" entrei 3");
         PersistentSession session_aux=this.getSession();
-        System.out.println("entrei 4");
         List<Movie> r = null;
         try {
             r = MovieDAO.queryMovie(session_aux,"id>0", "Id");
-            System.out.println("Retrieved " + r.size()  + " entries");
             
         } catch (Exception e) {
             System.out.println("didnt get any movies");
         }
         return r;
     }
+
+    @Override
+    public List<Movie> list_top_rated_movies() {
+        PersistentSession session_aux=this.getSession();
+        List<Movie> r = null;
+        try {
+            r = MovieDAO.queryMovie(session_aux,"id>0", "rating");
+            
+        } catch (Exception e) {
+            System.out.println("didnt get any movies");
+        }
+        return r;
+    }
+
+    @Override
+    public List<Movie> list_movies_by_year() {
+        PersistentSession session_aux=this.getSession();
+        List<Movie> r = null;
+        try {
+            r = MovieDAO.queryMovie(session_aux,"id>0", "release_year");
+            
+        } catch (Exception e) {
+            System.out.println("didnt get any movies");
+        }
+        return r;
+    }
+  
+    
+   
+    
     
     private static PersistentSession getSession() {
         if (session == null) {
