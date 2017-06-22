@@ -7,25 +7,19 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import moviedb_classes.Movie;
-import moviedb_classes.MovieDAO;
 import moviedb_classes.MovieDB;
-import moviedb_classes.MovieDB2PersistentManager;
-import org.orm.PersistentSession;
 
 /**
  *
  * @author Utilizador
  */
-@WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class Index extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +32,32 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         //To list all the entities, it is possible to use following code.
-        List<Movie> r = new ArrayList<Movie>();
-        
-        //System.out.println("entrei");
-        r= MovieDB.list_top_rated_movies();
-        
-        
-        request.setAttribute("movies", r);
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        
+            String user = request.getParameter("name");
+            String pwd = request.getParameter("password");
+            String pwd2=request.getParameter("password2");
+            String email= request.getParameter("email");
+            int register_state=MovieDB.register(user, email,pwd,pwd2);
+            
+            
+            switch(register_state){
+                case 1:
+                    request.setAttribute("log_state", 2);
+                request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
+                break;
+                case -1:
+                    request.setAttribute("register_state", -1);
+                    request.getRequestDispatcher("/WEB-INF/Register_Page.jsp").forward(request, response);
+                    break;
+                case -2:
+                    request.setAttribute("register_state", -2);
+                    request.getRequestDispatcher("/WEB-INF/Register_Page.jsp").forward(request, response);
+                    break;
+                case -3:
+                    request.setAttribute("register_state", -3);
+                    request.getRequestDispatcher("/WEB-INF/Register_Page.jsp").forward(request, response);
+                    break;
+            }
+           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

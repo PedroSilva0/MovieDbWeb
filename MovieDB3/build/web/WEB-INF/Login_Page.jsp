@@ -34,6 +34,14 @@
                 <strong>Error!</strong> Incorrect username or password.
             </div>
             <%}%>
+            <%
+             if(log_state==2){
+            %>
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> Account created successfuly. Please sign in.
+            </div>
+            <%}%>
           <form class="form-horizontal" method="POST" action="LoginServlet">
             <div class="form-group">
               <label for="username" class="cols-sm-2 control-label">Username</label>

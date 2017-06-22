@@ -5,10 +5,13 @@
  */
 package beans;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import moviedb_classes.MovieDB2PersistentManager;
 import moviedb_classes.User;
 import moviedb_classes.UserDAO;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 
 /**
@@ -32,7 +35,19 @@ public class UserBean implements UserBeanLocal {
         }
         return r;
     }
-   
+
+    @Override
+    public void register_user(User u) {
+        PersistentSession session_aux=this.getSession();
+       try {
+           UserDAO.save(u);
+       } catch (PersistentException ex) {
+           System.out.println("Não registou");
+       }
+    }
+    
+    
+      
    private static PersistentSession getSession() {
         if (session == null) {
             try {
