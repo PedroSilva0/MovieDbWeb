@@ -18,14 +18,17 @@ public class Movie {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == moviedb_classes.ORMConstants.KEY_MOVIE_RATED) {
-			return ORM_rated;
-		}
-		else if (key == moviedb_classes.ORMConstants.KEY_MOVIE_PARTICIPANTS) {
+		if (key == moviedb_classes.ORMConstants.KEY_MOVIE_PARTICIPANTS) {
 			return ORM_participants;
 		}
 		else if (key == moviedb_classes.ORMConstants.KEY_MOVIE_MOVIE_REVIEWS) {
 			return ORM_movie_reviews;
+		}
+		else if (key == moviedb_classes.ORMConstants.KEY_MOVIE_LISTS) {
+			return ORM_lists;
+		}
+		else if (key == moviedb_classes.ORMConstants.KEY_MOVIE_RATED) {
+			return ORM_rated;
 		}
 		
 		return null;
@@ -60,11 +63,13 @@ public class Movie {
 	
 	private float box_office;
 	
-	private java.util.Set ORM_rated = new java.util.HashSet();
-	
 	private java.util.Set ORM_participants = new java.util.HashSet();
 	
 	private java.util.Set ORM_movie_reviews = new java.util.HashSet();
+	
+	private java.util.Set ORM_lists = new java.util.HashSet();
+	
+	private java.util.Set ORM_rated = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.id = value;
@@ -158,16 +163,6 @@ public class Movie {
 		return box_office;
 	}
 	
-	private void setORM_Rated(java.util.Set value) {
-		this.ORM_rated = value;
-	}
-	
-	private java.util.Set getORM_Rated() {
-		return ORM_rated;
-	}
-	
-	public final moviedb_classes.UserSetCollection rated = new moviedb_classes.UserSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_MOVIE_RATED, moviedb_classes.ORMConstants.KEY_USER_EVALUATED, moviedb_classes.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
 	private void setORM_Participants(java.util.Set value) {
 		this.ORM_participants = value;
 	}
@@ -187,6 +182,26 @@ public class Movie {
 	}
 	
 	public final moviedb_classes.ReviewSetCollection movie_reviews = new moviedb_classes.ReviewSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_MOVIE_MOVIE_REVIEWS, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	private void setORM_Lists(java.util.Set value) {
+		this.ORM_lists = value;
+	}
+	
+	private java.util.Set getORM_Lists() {
+		return ORM_lists;
+	}
+	
+	public final moviedb_classes.ListsSetCollection lists = new moviedb_classes.ListsSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_MOVIE_LISTS, moviedb_classes.ORMConstants.KEY_LISTS_MOVIE, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	private void setORM_Rated(java.util.Set value) {
+		this.ORM_rated = value;
+	}
+	
+	private java.util.Set getORM_Rated() {
+		return ORM_rated;
+	}
+	
+	public final moviedb_classes.RatingsSetCollection rated = new moviedb_classes.RatingsSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_MOVIE_RATED, moviedb_classes.ORMConstants.KEY_RATINGS_MOVIE, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

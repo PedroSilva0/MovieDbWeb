@@ -21,6 +21,12 @@ public class RetrieveAndUpdateMovieDB2Data {
 			moviedb_classes.Review lmoviedb_classesReview = moviedb_classes.ReviewDAO.loadReviewByQuery(null, null);
 			// Update the properties of the persistent object
 			moviedb_classes.ReviewDAO.save(lmoviedb_classesReview);
+			moviedb_classes.Lists lmoviedb_classesLists = moviedb_classes.ListsDAO.loadListsByQuery(null, null);
+			// Update the properties of the persistent object
+			moviedb_classes.ListsDAO.save(lmoviedb_classesLists);
+			moviedb_classes.Ratings lmoviedb_classesRatings = moviedb_classes.RatingsDAO.loadRatingsByQuery(null, null);
+			// Update the properties of the persistent object
+			moviedb_classes.RatingsDAO.save(lmoviedb_classesRatings);
 			t.commit();
 		}
 		catch (Exception e) {
@@ -53,6 +59,20 @@ public class RetrieveAndUpdateMovieDB2Data {
 		// Please uncomment the follow line and fill in parameter(s)
 		//lmoviedb_classesReviewCriteria.id.eq();
 		System.out.println(lmoviedb_classesReviewCriteria.uniqueReview());
+		
+		System.out.println("Retrieving Lists by ListsCriteria");
+		moviedb_classes.ListsCriteria lmoviedb_classesListsCriteria = new moviedb_classes.ListsCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//lmoviedb_classesListsCriteria.user.eq();
+		//lmoviedb_classesListsCriteria.movie.eq();
+		System.out.println(lmoviedb_classesListsCriteria.uniqueLists());
+		
+		System.out.println("Retrieving Ratings by RatingsCriteria");
+		moviedb_classes.RatingsCriteria lmoviedb_classesRatingsCriteria = new moviedb_classes.RatingsCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//lmoviedb_classesRatingsCriteria.user.eq();
+		//lmoviedb_classesRatingsCriteria.movie.eq();
+		System.out.println(lmoviedb_classesRatingsCriteria.uniqueRatings());
 		
 	}
 	

@@ -24,10 +24,9 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression password;
 	public final StringExpression avatar;
 	public final StringExpression email;
-	public final CollectionExpression watched;
-	public final CollectionExpression plan_to_watch;
-	public final CollectionExpression evaluated;
 	public final CollectionExpression user_reviews;
+	public final CollectionExpression lists;
+	public final CollectionExpression evaluated;
 	
 	public UserDetachedCriteria() {
 		super(moviedb_classes.User.class, moviedb_classes.UserCriteria.class);
@@ -36,10 +35,9 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		password = new StringExpression("password", this.getDetachedCriteria());
 		avatar = new StringExpression("avatar", this.getDetachedCriteria());
 		email = new StringExpression("email", this.getDetachedCriteria());
-		watched = new CollectionExpression("ORM_Watched", this.getDetachedCriteria());
-		plan_to_watch = new CollectionExpression("ORM_Plan_to_watch", this.getDetachedCriteria());
-		evaluated = new CollectionExpression("ORM_Evaluated", this.getDetachedCriteria());
 		user_reviews = new CollectionExpression("ORM_User_reviews", this.getDetachedCriteria());
+		lists = new CollectionExpression("ORM_Lists", this.getDetachedCriteria());
+		evaluated = new CollectionExpression("ORM_Evaluated", this.getDetachedCriteria());
 	}
 	
 	public UserDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -49,26 +47,21 @@ public class UserDetachedCriteria extends AbstractORMDetachedCriteria {
 		password = new StringExpression("password", this.getDetachedCriteria());
 		avatar = new StringExpression("avatar", this.getDetachedCriteria());
 		email = new StringExpression("email", this.getDetachedCriteria());
-		watched = new CollectionExpression("ORM_Watched", this.getDetachedCriteria());
-		plan_to_watch = new CollectionExpression("ORM_Plan_to_watch", this.getDetachedCriteria());
-		evaluated = new CollectionExpression("ORM_Evaluated", this.getDetachedCriteria());
 		user_reviews = new CollectionExpression("ORM_User_reviews", this.getDetachedCriteria());
-	}
-	
-	public MovieDetachedCriteria createWatchedCriteria() {
-		return new MovieDetachedCriteria(createCriteria("ORM_Watched"));
-	}
-	
-	public MovieDetachedCriteria createPlan_to_watchCriteria() {
-		return new MovieDetachedCriteria(createCriteria("ORM_Plan_to_watch"));
-	}
-	
-	public MovieDetachedCriteria createEvaluatedCriteria() {
-		return new MovieDetachedCriteria(createCriteria("ORM_Evaluated"));
+		lists = new CollectionExpression("ORM_Lists", this.getDetachedCriteria());
+		evaluated = new CollectionExpression("ORM_Evaluated", this.getDetachedCriteria());
 	}
 	
 	public ReviewDetachedCriteria createUser_reviewsCriteria() {
 		return new ReviewDetachedCriteria(createCriteria("ORM_User_reviews"));
+	}
+	
+	public ListsDetachedCriteria createListsCriteria() {
+		return new ListsDetachedCriteria(createCriteria("ORM_Lists"));
+	}
+	
+	public RatingsDetachedCriteria createEvaluatedCriteria() {
+		return new RatingsDetachedCriteria(createCriteria("ORM_Evaluated"));
 	}
 	
 	public User uniqueUser(PersistentSession session) {

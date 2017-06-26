@@ -5,11 +5,6 @@
  */
 package run;
 
-import java.util.ArrayList;
-import java.util.List;
-import moviedb_classes.Movie;
-import moviedb_classes.MovieDAO;
-import moviedb_classes.MovieDB;
 import moviedb_classes.User;
 import moviedb_classes.UserDAO;
 
@@ -20,11 +15,32 @@ import moviedb_classes.UserDAO;
 public class main {
 
     public static void main(String[] args) {
-        List<Movie> aux= new ArrayList<Movie>();
-        aux=MovieDB.list_all_movies();
-        System.out.println(aux.get(0).getTitle());
-       /*List<Movie> r = MovieDB.list_all_movies();
-       System.out.println(r.size());*/
+        User u = new User();
+        u.setAvatar("C:\\MovieDB_images\\avatars\\default");
+        u.setEmail("mail@mail.com");
+        u.setPassword("pass1");
+        u.setUsername("User1");
+        try {
+            UserDAO.save(u);
+        } catch (Exception e) {
+            System.out.println("didn't save user");
+        }
+
+        try {
+            User b = UserDAO.getUserByORMID(1);
+            System.out.println("Loaded A with id " + b.getId());
+            
+        } catch (Exception e) {
+            System.out.println("didnt load user");
+        }
+        //To list all the entities, it is possible to use following code.
+        try {
+            User[] r = UserDAO.listUserByQuery("id>0", "Id");
+            System.out.println("Retrieved " + r.length + " entries");
+            
+        } catch (Exception e) {
+            System.out.println("didnt get any users");
+        }
     }
 
 }

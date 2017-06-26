@@ -57,29 +57,26 @@ VALUES
 (9,9),
 (10,10);
 
-INSERT INTO `moviedb`.`user_movie`
-(`UserId`,`MovieId`)
+INSERT INTO `moviedb`.`ratings`
+(`UserId`,`MovieId`,`rating`)
 VALUES
-(1,1),
-(1,2),
-(1,3),
-(1,4),
-(2,7);
+(1,1,8),
+(1,2,7),
+(1,3,6),
+(1,4,5),
+(2,7,7);
 
-INSERT INTO `moviedb`.`user_movie2`
-(`UserId`,`MovieId`)
+INSERT INTO `moviedb`.`lists`
+(`UserId`,`MovieId`,`list_name`)
 VALUES
-(1,1),
-(1,2),
-(1,3),
-(1,4),
-(2,7);
+(1,1,'watched'),
+(1,2,'watched'),
+(1,3,'watched'),
+(1,4,'watched'),
+(1,5,'plan to watch'),
+(2,6,'plan to watch'),
+(2,8,'plan to watch'),
+(2,9,'plan to watch'),
+(2,7,'watched');
 
 
-INSERT INTO `moviedb`.`user_movie3`
-(`UserId`,`MovieId`)
-VALUES
-(1,5),
-(2,6),
-(2,8),
-(2,9);

@@ -10,10 +10,10 @@ public class CreateMovieDB2Data {
 		PersistentTransaction t = moviedb_classes.MovieDB2PersistentManager.instance().getSession().beginTransaction();
 		try {
 			moviedb_classes.Movie lmoviedb_classesMovie = moviedb_classes.MovieDAO.createMovie();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : movie_reviews, participants, rated, box_office, rating, release_year, release_month, release_day, duration
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : rated, lists, movie_reviews, participants, box_office, rating, release_year, release_month, release_day, duration
 			moviedb_classes.MovieDAO.save(lmoviedb_classesMovie);
 			moviedb_classes.User lmoviedb_classesUser = moviedb_classes.UserDAO.createUser();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : user_reviews, evaluated, plan_to_watch, watched
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : evaluated, lists, user_reviews
 			moviedb_classes.UserDAO.save(lmoviedb_classesUser);
 			moviedb_classes.Staff lmoviedb_classesStaff = moviedb_classes.StaffDAO.createStaff();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : worked
@@ -21,6 +21,12 @@ public class CreateMovieDB2Data {
 			moviedb_classes.Review lmoviedb_classesReview = moviedb_classes.ReviewDAO.createReview();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : overall_grade, enjoyment_grade, direction_grade, story_grade, sound_grade
 			moviedb_classes.ReviewDAO.save(lmoviedb_classesReview);
+			moviedb_classes.Lists lmoviedb_classesLists = moviedb_classes.ListsDAO.createLists();
+			// Initialize the properties of the persistent object here
+			moviedb_classes.ListsDAO.save(lmoviedb_classesLists);
+			moviedb_classes.Ratings lmoviedb_classesRatings = moviedb_classes.RatingsDAO.createRatings();
+			// Initialize the properties of the persistent object here
+			moviedb_classes.RatingsDAO.save(lmoviedb_classesRatings);
 			t.commit();
 		}
 		catch (Exception e) {

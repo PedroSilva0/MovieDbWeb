@@ -10,21 +10,16 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<property name="duration" column="Duration" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="release_day" column="Release_day" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="release_month" column="Release_month" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="release_year" column="Release_year" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="rating" column="Rating" type="float" length="10" not-null="true" lazy="false"/>
+		<property name="duration" column="Duration" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="release_day" column="Release_day" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="release_month" column="Release_month" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="release_year" column="Release_year" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="rating" column="Rating" type="float" not-null="true" lazy="false"/>
 		<property name="title" column="Title" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="poster" column="Poster" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="genre" column="Genre" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="synopsys" column="Synopsys" type="string" length="255" not-null="false" lazy="false"/>
-		<property name="box_office" column="Box_office" type="float" length="10" not-null="true" lazy="false"/>
-		<set name="ORM_Rated" table="User_Movie3" lazy="true" cascade="save-update,lock" inverse="true">
-			<key column="MovieId" not-null="true"/>
-			<many-to-many column="UserId" class="moviedb_classes.User">
-			</many-to-many>
-		</set>
+		<property name="box_office" column="Box_office" type="float" not-null="true" lazy="false"/>
 		<set name="ORM_Participants" table="Movie_Staff" lazy="true" cascade="save-update,lock">
 			<key column="MovieId" not-null="true"/>
 			<many-to-many column="StaffId" class="moviedb_classes.Staff">
@@ -33,6 +28,14 @@ License Type: Academic
 		<set name="ORM_Movie_reviews" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="MovieId" not-null="true"/>
 			<one-to-many class="moviedb_classes.Review"/>
+		</set>
+		<set name="ORM_Lists" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="MovieId" not-null="true"/>
+			<one-to-many class="moviedb_classes.Lists"/>
+		</set>
+		<set name="ORM_Rated" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="MovieId" not-null="true"/>
+			<one-to-many class="moviedb_classes.Ratings"/>
 		</set>
 	</class>
 </hibernate-mapping>

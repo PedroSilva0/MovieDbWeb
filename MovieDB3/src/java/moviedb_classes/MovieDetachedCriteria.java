@@ -30,9 +30,10 @@ public class MovieDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression genre;
 	public final StringExpression synopsys;
 	public final FloatExpression box_office;
-	public final CollectionExpression rated;
 	public final CollectionExpression participants;
 	public final CollectionExpression movie_reviews;
+	public final CollectionExpression lists;
+	public final CollectionExpression rated;
 	
 	public MovieDetachedCriteria() {
 		super(moviedb_classes.Movie.class, moviedb_classes.MovieCriteria.class);
@@ -47,9 +48,10 @@ public class MovieDetachedCriteria extends AbstractORMDetachedCriteria {
 		genre = new StringExpression("genre", this.getDetachedCriteria());
 		synopsys = new StringExpression("synopsys", this.getDetachedCriteria());
 		box_office = new FloatExpression("box_office", this.getDetachedCriteria());
-		rated = new CollectionExpression("ORM_Rated", this.getDetachedCriteria());
 		participants = new CollectionExpression("ORM_Participants", this.getDetachedCriteria());
 		movie_reviews = new CollectionExpression("ORM_Movie_reviews", this.getDetachedCriteria());
+		lists = new CollectionExpression("ORM_Lists", this.getDetachedCriteria());
+		rated = new CollectionExpression("ORM_Rated", this.getDetachedCriteria());
 	}
 	
 	public MovieDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -65,13 +67,10 @@ public class MovieDetachedCriteria extends AbstractORMDetachedCriteria {
 		genre = new StringExpression("genre", this.getDetachedCriteria());
 		synopsys = new StringExpression("synopsys", this.getDetachedCriteria());
 		box_office = new FloatExpression("box_office", this.getDetachedCriteria());
-		rated = new CollectionExpression("ORM_Rated", this.getDetachedCriteria());
 		participants = new CollectionExpression("ORM_Participants", this.getDetachedCriteria());
 		movie_reviews = new CollectionExpression("ORM_Movie_reviews", this.getDetachedCriteria());
-	}
-	
-	public UserDetachedCriteria createRatedCriteria() {
-		return new UserDetachedCriteria(createCriteria("ORM_Rated"));
+		lists = new CollectionExpression("ORM_Lists", this.getDetachedCriteria());
+		rated = new CollectionExpression("ORM_Rated", this.getDetachedCriteria());
 	}
 	
 	public StaffDetachedCriteria createParticipantsCriteria() {
@@ -80,6 +79,14 @@ public class MovieDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public ReviewDetachedCriteria createMovie_reviewsCriteria() {
 		return new ReviewDetachedCriteria(createCriteria("ORM_Movie_reviews"));
+	}
+	
+	public ListsDetachedCriteria createListsCriteria() {
+		return new ListsDetachedCriteria(createCriteria("ORM_Lists"));
+	}
+	
+	public RatingsDetachedCriteria createRatedCriteria() {
+		return new RatingsDetachedCriteria(createCriteria("ORM_Rated"));
 	}
 	
 	public Movie uniqueMovie(PersistentSession session) {

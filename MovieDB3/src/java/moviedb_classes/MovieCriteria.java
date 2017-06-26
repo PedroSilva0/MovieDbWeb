@@ -30,9 +30,10 @@ public class MovieCriteria extends AbstractORMCriteria {
 	public final StringExpression genre;
 	public final StringExpression synopsys;
 	public final FloatExpression box_office;
-	public final CollectionExpression rated;
 	public final CollectionExpression participants;
 	public final CollectionExpression movie_reviews;
+	public final CollectionExpression lists;
+	public final CollectionExpression rated;
 	
 	public MovieCriteria(Criteria criteria) {
 		super(criteria);
@@ -47,9 +48,10 @@ public class MovieCriteria extends AbstractORMCriteria {
 		genre = new StringExpression("genre", this);
 		synopsys = new StringExpression("synopsys", this);
 		box_office = new FloatExpression("box_office", this);
-		rated = new CollectionExpression("ORM_Rated", this);
 		participants = new CollectionExpression("ORM_Participants", this);
 		movie_reviews = new CollectionExpression("ORM_Movie_reviews", this);
+		lists = new CollectionExpression("ORM_Lists", this);
+		rated = new CollectionExpression("ORM_Rated", this);
 	}
 	
 	public MovieCriteria(PersistentSession session) {
@@ -60,16 +62,20 @@ public class MovieCriteria extends AbstractORMCriteria {
 		this(moviedb_classes.MovieDB2PersistentManager.instance().getSession());
 	}
 	
-	public UserCriteria createRatedCriteria() {
-		return new UserCriteria(createCriteria("ORM_Rated"));
-	}
-	
 	public StaffCriteria createParticipantsCriteria() {
 		return new StaffCriteria(createCriteria("ORM_Participants"));
 	}
 	
 	public ReviewCriteria createMovie_reviewsCriteria() {
 		return new ReviewCriteria(createCriteria("ORM_Movie_reviews"));
+	}
+	
+	public ListsCriteria createListsCriteria() {
+		return new ListsCriteria(createCriteria("ORM_Lists"));
+	}
+	
+	public RatingsCriteria createRatedCriteria() {
+		return new RatingsCriteria(createCriteria("ORM_Rated"));
 	}
 	
 	public Movie uniqueMovie() {

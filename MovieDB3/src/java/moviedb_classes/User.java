@@ -18,17 +18,14 @@ public class User {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == moviedb_classes.ORMConstants.KEY_USER_WATCHED) {
-			return ORM_watched;
+		if (key == moviedb_classes.ORMConstants.KEY_USER_USER_REVIEWS) {
+			return ORM_user_reviews;
 		}
-		else if (key == moviedb_classes.ORMConstants.KEY_USER_PLAN_TO_WATCH) {
-			return ORM_plan_to_watch;
+		else if (key == moviedb_classes.ORMConstants.KEY_USER_LISTS) {
+			return ORM_lists;
 		}
 		else if (key == moviedb_classes.ORMConstants.KEY_USER_EVALUATED) {
 			return ORM_evaluated;
-		}
-		else if (key == moviedb_classes.ORMConstants.KEY_USER_USER_REVIEWS) {
-			return ORM_user_reviews;
 		}
 		
 		return null;
@@ -51,13 +48,11 @@ public class User {
 	
 	private String email;
 	
-	private java.util.Set ORM_watched = new java.util.HashSet();
+	private java.util.Set ORM_user_reviews = new java.util.HashSet();
 	
-	private java.util.Set ORM_plan_to_watch = new java.util.HashSet();
+	private java.util.Set ORM_lists = new java.util.HashSet();
 	
 	private java.util.Set ORM_evaluated = new java.util.HashSet();
-	
-	private java.util.Set ORM_user_reviews = new java.util.HashSet();
 	
 	public void setUsername(String value) {
 		this.username = value;
@@ -103,36 +98,6 @@ public class User {
 		return getId();
 	}
 	
-	private void setORM_Watched(java.util.Set value) {
-		this.ORM_watched = value;
-	}
-	
-	private java.util.Set getORM_Watched() {
-		return ORM_watched;
-	}
-	
-	public final moviedb_classes.MovieSetCollection watched = new moviedb_classes.MovieSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_WATCHED, moviedb_classes.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
-	private void setORM_Plan_to_watch(java.util.Set value) {
-		this.ORM_plan_to_watch = value;
-	}
-	
-	private java.util.Set getORM_Plan_to_watch() {
-		return ORM_plan_to_watch;
-	}
-	
-	public final moviedb_classes.MovieSetCollection plan_to_watch = new moviedb_classes.MovieSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_PLAN_TO_WATCH, moviedb_classes.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
-	private void setORM_Evaluated(java.util.Set value) {
-		this.ORM_evaluated = value;
-	}
-	
-	private java.util.Set getORM_Evaluated() {
-		return ORM_evaluated;
-	}
-	
-	public final moviedb_classes.MovieSetCollection evaluated = new moviedb_classes.MovieSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_EVALUATED, moviedb_classes.ORMConstants.KEY_MOVIE_RATED, moviedb_classes.ORMConstants.KEY_MUL_MANY_TO_MANY);
-	
 	private void setORM_User_reviews(java.util.Set value) {
 		this.ORM_user_reviews = value;
 	}
@@ -142,6 +107,26 @@ public class User {
 	}
 	
 	public final moviedb_classes.ReviewSetCollection user_reviews = new moviedb_classes.ReviewSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_USER_REVIEWS, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	private void setORM_Lists(java.util.Set value) {
+		this.ORM_lists = value;
+	}
+	
+	private java.util.Set getORM_Lists() {
+		return ORM_lists;
+	}
+	
+	public final moviedb_classes.ListsSetCollection lists = new moviedb_classes.ListsSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_LISTS, moviedb_classes.ORMConstants.KEY_LISTS_USER, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	private void setORM_Evaluated(java.util.Set value) {
+		this.ORM_evaluated = value;
+	}
+	
+	private java.util.Set getORM_Evaluated() {
+		return ORM_evaluated;
+	}
+	
+	public final moviedb_classes.RatingsSetCollection evaluated = new moviedb_classes.RatingsSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_USER_EVALUATED, moviedb_classes.ORMConstants.KEY_RATINGS_USER, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

@@ -11,10 +11,10 @@ License Type: Academic
 			</generator>
 		</id>
 		<property name="review" column="Review" type="string" length="255" not-null="false" lazy="false"/>
-		<property name="sound_grade" column="Sound_grade" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="story_grade" column="Story_grade" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="direction_grade" column="Direction_grade" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="enjoyment_grade" column="Enjoyment_grade" type="integer" length="10" not-null="true" lazy="false"/>
-		<property name="overall_grade" column="Overall_grade" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="sound_grade" column="Sound_grade" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="story_grade" column="Story_grade" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="direction_grade" column="Direction_grade" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="enjoyment_grade" column="Enjoyment_grade" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="overall_grade" column="Overall_grade" type="integer" length="11" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

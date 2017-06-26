@@ -24,10 +24,9 @@ public class UserCriteria extends AbstractORMCriteria {
 	public final StringExpression password;
 	public final StringExpression avatar;
 	public final StringExpression email;
-	public final CollectionExpression watched;
-	public final CollectionExpression plan_to_watch;
-	public final CollectionExpression evaluated;
 	public final CollectionExpression user_reviews;
+	public final CollectionExpression lists;
+	public final CollectionExpression evaluated;
 	
 	public UserCriteria(Criteria criteria) {
 		super(criteria);
@@ -36,10 +35,9 @@ public class UserCriteria extends AbstractORMCriteria {
 		password = new StringExpression("password", this);
 		avatar = new StringExpression("avatar", this);
 		email = new StringExpression("email", this);
-		watched = new CollectionExpression("ORM_Watched", this);
-		plan_to_watch = new CollectionExpression("ORM_Plan_to_watch", this);
-		evaluated = new CollectionExpression("ORM_Evaluated", this);
 		user_reviews = new CollectionExpression("ORM_User_reviews", this);
+		lists = new CollectionExpression("ORM_Lists", this);
+		evaluated = new CollectionExpression("ORM_Evaluated", this);
 	}
 	
 	public UserCriteria(PersistentSession session) {
@@ -50,20 +48,16 @@ public class UserCriteria extends AbstractORMCriteria {
 		this(moviedb_classes.MovieDB2PersistentManager.instance().getSession());
 	}
 	
-	public MovieCriteria createWatchedCriteria() {
-		return new MovieCriteria(createCriteria("ORM_Watched"));
-	}
-	
-	public MovieCriteria createPlan_to_watchCriteria() {
-		return new MovieCriteria(createCriteria("ORM_Plan_to_watch"));
-	}
-	
-	public MovieCriteria createEvaluatedCriteria() {
-		return new MovieCriteria(createCriteria("ORM_Evaluated"));
-	}
-	
 	public ReviewCriteria createUser_reviewsCriteria() {
 		return new ReviewCriteria(createCriteria("ORM_User_reviews"));
+	}
+	
+	public ListsCriteria createListsCriteria() {
+		return new ListsCriteria(createCriteria("ORM_Lists"));
+	}
+	
+	public RatingsCriteria createEvaluatedCriteria() {
+		return new RatingsCriteria(createCriteria("ORM_Evaluated"));
 	}
 	
 	public User uniqueUser() {

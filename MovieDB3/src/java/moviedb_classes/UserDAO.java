@@ -323,9 +323,13 @@ public class UserDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.User user)throws PersistentException {
 		try {
-			moviedb_classes.Movie[] lEvaluateds = user.evaluated.toArray();
+			moviedb_classes.Lists[] lListss = user.lists.toArray();
+			for(int i = 0; i < lListss.length; i++) {
+				lListss[i].setUser(null);
+			}
+			moviedb_classes.Ratings[] lEvaluateds = user.evaluated.toArray();
 			for(int i = 0; i < lEvaluateds.length; i++) {
-				lEvaluateds[i].rated.remove(user);
+				lEvaluateds[i].setUser(null);
 			}
 			return delete(user);
 		}
@@ -337,9 +341,13 @@ public class UserDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.User user, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			moviedb_classes.Movie[] lEvaluateds = user.evaluated.toArray();
+			moviedb_classes.Lists[] lListss = user.lists.toArray();
+			for(int i = 0; i < lListss.length; i++) {
+				lListss[i].setUser(null);
+			}
+			moviedb_classes.Ratings[] lEvaluateds = user.evaluated.toArray();
 			for(int i = 0; i < lEvaluateds.length; i++) {
-				lEvaluateds[i].rated.remove(user);
+				lEvaluateds[i].setUser(null);
 			}
 			try {
 				session.delete(user);

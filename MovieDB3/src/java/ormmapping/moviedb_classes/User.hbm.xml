@@ -14,24 +14,17 @@ License Type: Academic
 		<property name="password" column="Password" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="avatar" column="Avatar" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="email" column="Email" type="string" length="255" not-null="false" lazy="false"/>
-		<set name="ORM_Watched" table="User_Movie" lazy="true" cascade="save-update,lock">
-			<key column="UserId" not-null="true"/>
-			<many-to-many column="MovieId" class="moviedb_classes.Movie">
-			</many-to-many>
-		</set>
-		<set name="ORM_Plan_to_watch" table="User_Movie2" lazy="true" cascade="save-update,lock">
-			<key column="UserId" not-null="true"/>
-			<many-to-many column="MovieId" class="moviedb_classes.Movie">
-			</many-to-many>
-		</set>
-		<set name="ORM_Evaluated" table="User_Movie3" lazy="true" cascade="save-update,lock">
-			<key column="UserId" not-null="true"/>
-			<many-to-many column="MovieId" class="moviedb_classes.Movie">
-			</many-to-many>
-		</set>
 		<set name="ORM_User_reviews" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="UserId" not-null="true"/>
 			<one-to-many class="moviedb_classes.Review"/>
+		</set>
+		<set name="ORM_Lists" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="UserId" not-null="true"/>
+			<one-to-many class="moviedb_classes.Lists"/>
+		</set>
+		<set name="ORM_Evaluated" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="UserId" not-null="true"/>
+			<one-to-many class="moviedb_classes.Ratings"/>
 		</set>
 	</class>
 </hibernate-mapping>
