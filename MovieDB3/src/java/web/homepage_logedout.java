@@ -40,6 +40,13 @@ public class homepage_logedout extends HttpServlet {
         //System.out.println("entrei");
         //r= MovieDB.list_all_movies();
         //request.setAttribute("movies", r);
+        List<Movie> r = new ArrayList<Movie>();
+        
+        //System.out.println("entrei");
+        r= MovieDB.list_all_movies();
+        
+        
+        request.setAttribute("top_movies", r);
         request.getRequestDispatcher("/WEB-INF/homepage_logedout.jsp").forward(request, response);
     }
 

@@ -35,7 +35,6 @@ public class MovieDB {
    
     
     public static List<Movie> list_all_movies(){
-        
         return movieBean.list_all_movies();
     }
     
