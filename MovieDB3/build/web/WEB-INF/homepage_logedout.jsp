@@ -38,102 +38,112 @@
     </head>
     <body>
         <div>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
-                    </a>
-                    <a class="navbar-brand" href="#" style="padding-top:15px">
-                        MovieDB
-                    </a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <form method="POST" action="Login_Register_Page_Servlet" class="navbar-form navbar-right" >
-                        <input type="submit" name="login" class="btn btn-default" value="Login">
-                        <input type="submit" name="register" class="btn btn-default" value="Register">
-                    </form>
-                    <form class="navbar-form" id="search">
-                        <div class="form-group" style="display:inline;">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search movie title">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
+                        </a>
+                        <a class="navbar-brand" href="#" style="padding-top:15px">
+                            MovieDB
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <form method="POST" action="Login_Register_Page_Servlet" class="navbar-form navbar-right" >
+                            <input type="submit" name="login" class="btn btn-default" value="Login">
+                            <input type="submit" name="register" class="btn btn-default" value="Register">
+                        </form>
+                        <form class="navbar-form" id="search">
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Search movie title">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-        <div class="container">
-             
-            <h4 style="padding-top: 100px"> Top Rated </h4>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="Carousel" class="carousel slide">
-
-                        <ol class="carousel-indicators hidden">
-                            <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-                            <% List<Movie> top_movies = (List) request.getAttribute("top_movies");
-                                int pages = (int) Math.ceil(top_movies.size() / 6.0);
-                                System.out.println(pages);
-                                int i;
-                                for(i=1;i<pages;i++) { %>
-                                    <li data-target="#Carousel" data-slide-to="<%=i%>"></li>
-                            <%}%>
-                        </ol>
-
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            
-                            <div class="item active">
-                                <div class="row">
-                                <%
-                                    i=0;
-                                int max_page=i+6;
-                                for(i=0;i<top_movies.size()&&i<max_page;i++){
-                                    Movie m=top_movies.get(i);%>
-                                    <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; width:150px;"></a></div>
-                                <%}%>
-                                    
-                                    </div><!--.row-->
-                            </div><!--.item-->
-                            
-                            <%
-                                int page_aux;
-                                for(page_aux=1;page_aux<pages;page_aux++){
-                            %>
-
-                            <div class="item">
-                                <div class="row">
-                                    <% 
-                                    max_page=max_page+6;
-                                    for(i=i;i<top_movies.size()&&i<max_page;i++){
-                                        Movie m=top_movies.get(i);%>
-                                    
-                                    <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; width:150px;"></a></div>
-                                    <%}%>
-                                </div><!--.row-->
-                            </div><!--.item-->
-                            <%}%>
-                        </div><!--.carousel-inner-->
-                        <a data-slide="prev" href="#Carousel" class="left carousel-control"><</a>
-                        <a data-slide="next" href="#Carousel" class="right carousel-control">></a>
-                    </div><!--.Carousel-->
-
+                    </div><!--/.nav-collapse -->
                 </div>
             </div>
-        </div><!--.container-->
-              </div>
+            <div class="container">
+
+                <h4 style="padding-top: 100px"> Top Rated </h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="Carousel" class="carousel slide">
+
+                            <ol class="carousel-indicators hidden">
+                                <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                                    <% List<Movie> top_movies = (List) request.getAttribute("top_movies");
+                                        int pages = (int) Math.ceil(top_movies.size() / 6.0);
+                                        System.out.println(pages);
+                                        int i;
+                                        for (i = 1; i < pages; i++) {%>
+                                <li data-target="#Carousel" data-slide-to="<%=i%>"></li>
+                                    <%}%>
+                            </ol>
+
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                    <div class="row">
+                                        <%
+                                            i = 0;
+                                            int max_page = i + 6;
+                                            for (i = 0; i < top_movies.size() && i < max_page; i++) {
+                                        Movie m = top_movies.get(i);%>
+                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href="#"><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                        <%}%>
+
+                                    </div><!--.row-->
+                                </div><!--.item-->
+
+                                <%
+                                    int page_aux;
+                                    for (page_aux = 1; page_aux < pages; page_aux++) {
+                                %>
+
+                                <div class="item">
+                                    <div class="row">
+                                        <%
+                                            max_page = max_page + 6;
+                                            for (i = i; i < top_movies.size() && i < max_page; i++) {
+                                            Movie m = top_movies.get(i);%>
+
+                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href="#"><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                                <%}%>
+                                    </div><!--.row-->
+                                </div><!--.item-->
+                                <%}%>
+                            </div><!--.carousel-inner-->
+                            <a data-slide="prev" href="#Carousel" class="left carousel-control"><</a>
+                            <a data-slide="next" href="#Carousel" class="right carousel-control">></a>
+                        </div><!--.Carousel-->
+
+                    </div>
+                </div>
+            </div><!--.container-->
+        </div>
 
         <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/list.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="js/list.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
 
     </body>
 </html>
