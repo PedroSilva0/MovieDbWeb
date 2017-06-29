@@ -67,7 +67,7 @@
             </div>
             <div class="container">
 
-                <h4 style="padding-top: 100px"> Top Rated </h4>
+                <h4 style="padding-top: 100px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="Carousel" class="carousel slide">

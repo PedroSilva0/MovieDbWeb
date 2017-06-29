@@ -27,6 +27,9 @@ public class DeleteMovieDB2Data {
 			moviedb_classes.Ratings lmoviedb_classesRatings = moviedb_classes.RatingsDAO.loadRatingsByQuery(null, null);
 			// Delete the persistent object
 			moviedb_classes.RatingsDAO.delete(lmoviedb_classesRatings);
+			moviedb_classes.Movie_Staff lmoviedb_classesMovie_Staff = moviedb_classes.Movie_StaffDAO.loadMovie_StaffByQuery(null, null);
+			// Delete the persistent object
+			moviedb_classes.Movie_StaffDAO.delete(lmoviedb_classesMovie_Staff);
 			t.commit();
 		}
 		catch (Exception e) {

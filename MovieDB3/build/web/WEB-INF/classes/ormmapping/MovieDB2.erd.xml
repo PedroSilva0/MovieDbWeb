@@ -193,17 +193,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="Role">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>255</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="Name">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -440,6 +429,17 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="role">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>255</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
   <ForeignKey name="creates">
     <ReferenceTable>Lists</ReferenceTable>
@@ -481,7 +481,7 @@
       <Column>Id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="works">
+  <ForeignKey name="FKMovie_Staf787137">
     <ReferenceTable>Movie_Staff</ReferenceTable>
     <ReferencedTable>Movie</ReferencedTable>
     <Columns>
@@ -491,7 +491,7 @@
       <Column>Id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="works2">
+  <ForeignKey name="participates">
     <ReferenceTable>Movie_Staff</ReferenceTable>
     <ReferencedTable>Staff</ReferencedTable>
     <Columns>

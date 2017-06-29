@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -217,6 +218,47 @@ public class MovieDB {
             System.out.println("problem with ratings bean");
             throw new RuntimeException(ne);
         }
+    }
+
+    public static List<Movie> list_top_rated_movies(int i) {
+        List<Movie> res= movieBean.list_top_rated_movies();
+        Collections.reverse(res);
+        if(res.size()>i+20){
+            res=res.subList(i,i+20);
+        }else{
+            res=res.subList(i,i+res.size());
+        }
+        return res;
+    }
+
+    public static User get_user(String username) {
+        User u= userBean.get_user_by_username(username);
+        return u;
+    }
+
+    public static List<Movie> list_user_list(int i, int id, String list_type) {
+        List<Lists> aux= listsBean.get_list(id,list_type);
+        List<Movie> res= new ArrayList<>();
+        for(Lists l:aux){
+            res.add(l.getMovie());
+        }
+        
+        Collections.sort(res, new Comparator<Movie>() {
+    public int compare(Movie one, Movie other) {
+        return one.getTitle().compareTo(other.getTitle());
+    }
+}); 
+        //Collections.reverse(res);
+        if(res.size()>i+20){
+            res=res.subList(i,i+20);
+        }else{
+            res=res.subList(i,i+res.size());
+        }
+        return res;
+    }
+
+    public static void remove_from_list(int user_id, int movie_id, String list_type) {
+        listsBean.remove_from_list(user_id,movie_id,list_type);
     }
 
     

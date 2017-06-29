@@ -2,6 +2,15 @@ CREATE DATABASE `moviedb` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 use moviedb;
 
+CREATE TABLE `user` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `Avatar` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `movie` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Duration` int(11) NOT NULL,
@@ -17,22 +26,34 @@ CREATE TABLE `movie` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  `Avatar` varchar(255) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `staff` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Role` varchar(255) DEFAULT NULL,
   `Name` varchar(255) DEFAULT NULL,
   `Bio` varchar(255) DEFAULT NULL,
   `Picture` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `lists` (
+  `UserId` int(11) NOT NULL,
+  `MovieId` int(11) NOT NULL,
+  `list_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`UserId`,`MovieId`),
+  KEY `creates` (`UserId`),
+  KEY `FKLists656203` (`MovieId`),
+  CONSTRAINT `FKLists656203` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`),
+  CONSTRAINT `creates` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ratings` (
+  `UserId` int(11) NOT NULL,
+  `MovieId` int(11) NOT NULL,
+  `rating` int(11) DEFAULT NULL,
+  PRIMARY KEY (`UserId`,`MovieId`),
+  KEY `FKRatings736484` (`UserId`),
+  KEY `evaluates` (`MovieId`),
+  CONSTRAINT `FKRatings736484` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`),
+  CONSTRAINT `evaluates` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `review` (
@@ -55,31 +76,10 @@ CREATE TABLE `review` (
 CREATE TABLE `movie_staff` (
   `MovieId` int(11) NOT NULL,
   `StaffId` int(11) NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`MovieId`,`StaffId`),
-  KEY `works` (`MovieId`),
-  KEY `works2` (`StaffId`),
-  CONSTRAINT `works` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`),
-  CONSTRAINT `works2` FOREIGN KEY (`StaffId`) REFERENCES `staff` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `ratings` (
-  `UserId` int(11) NOT NULL,
-  `MovieId` int(11) NOT NULL,
-  `rating` int(11) DEFAULT NULL,
-  PRIMARY KEY (`UserId`,`MovieId`),
-  KEY `FKRatings736484` (`UserId`),
-  KEY `evaluates` (`MovieId`),
-  CONSTRAINT `FKRatings736484` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`),
-  CONSTRAINT `evaluates` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `lists` (
-  `UserId` int(11) NOT NULL,
-  `MovieId` int(11) NOT NULL,
-  `list_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`UserId`,`MovieId`),
-  KEY `creates` (`UserId`),
-  KEY `FKLists656203` (`MovieId`),
-  CONSTRAINT `FKLists656203` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`),
-  CONSTRAINT `creates` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`)
+  KEY `FKMovie_Staf787137` (`MovieId`),
+  KEY `participates` (`StaffId`),
+  CONSTRAINT `FKMovie_Staf787137` FOREIGN KEY (`MovieId`) REFERENCES `movie` (`Id`),
+  CONSTRAINT `participates` FOREIGN KEY (`StaffId`) REFERENCES `staff` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

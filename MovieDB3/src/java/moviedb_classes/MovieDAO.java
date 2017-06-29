@@ -323,10 +323,6 @@ public class MovieDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.Movie movie)throws PersistentException {
 		try {
-			moviedb_classes.Staff[] lParticipantss = movie.participants.toArray();
-			for(int i = 0; i < lParticipantss.length; i++) {
-				lParticipantss[i].worked.remove(movie);
-			}
 			moviedb_classes.Lists[] lListss = movie.lists.toArray();
 			for(int i = 0; i < lListss.length; i++) {
 				lListss[i].setMovie(null);
@@ -334,6 +330,10 @@ public class MovieDAO {
 			moviedb_classes.Ratings[] lRateds = movie.rated.toArray();
 			for(int i = 0; i < lRateds.length; i++) {
 				lRateds[i].setMovie(null);
+			}
+			moviedb_classes.Movie_Staff[] lParticipantss = movie.participants.toArray();
+			for(int i = 0; i < lParticipantss.length; i++) {
+				lParticipantss[i].setMovie(null);
 			}
 			return delete(movie);
 		}
@@ -345,10 +345,6 @@ public class MovieDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.Movie movie, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			moviedb_classes.Staff[] lParticipantss = movie.participants.toArray();
-			for(int i = 0; i < lParticipantss.length; i++) {
-				lParticipantss[i].worked.remove(movie);
-			}
 			moviedb_classes.Lists[] lListss = movie.lists.toArray();
 			for(int i = 0; i < lListss.length; i++) {
 				lListss[i].setMovie(null);
@@ -356,6 +352,10 @@ public class MovieDAO {
 			moviedb_classes.Ratings[] lRateds = movie.rated.toArray();
 			for(int i = 0; i < lRateds.length; i++) {
 				lRateds[i].setMovie(null);
+			}
+			moviedb_classes.Movie_Staff[] lParticipantss = movie.participants.toArray();
+			for(int i = 0; i < lParticipantss.length; i++) {
+				lParticipantss[i].setMovie(null);
 			}
 			try {
 				session.delete(movie);

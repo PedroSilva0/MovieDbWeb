@@ -27,6 +27,9 @@ public class RetrieveAndUpdateMovieDB2Data {
 			moviedb_classes.Ratings lmoviedb_classesRatings = moviedb_classes.RatingsDAO.loadRatingsByQuery(null, null);
 			// Update the properties of the persistent object
 			moviedb_classes.RatingsDAO.save(lmoviedb_classesRatings);
+			moviedb_classes.Movie_Staff lmoviedb_classesMovie_Staff = moviedb_classes.Movie_StaffDAO.loadMovie_StaffByQuery(null, null);
+			// Update the properties of the persistent object
+			moviedb_classes.Movie_StaffDAO.save(lmoviedb_classesMovie_Staff);
 			t.commit();
 		}
 		catch (Exception e) {
@@ -73,6 +76,13 @@ public class RetrieveAndUpdateMovieDB2Data {
 		//lmoviedb_classesRatingsCriteria.user.eq();
 		//lmoviedb_classesRatingsCriteria.movie.eq();
 		System.out.println(lmoviedb_classesRatingsCriteria.uniqueRatings());
+		
+		System.out.println("Retrieving Movie_Staff by Movie_StaffCriteria");
+		moviedb_classes.Movie_StaffCriteria lmoviedb_classesMovie_StaffCriteria = new moviedb_classes.Movie_StaffCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//lmoviedb_classesMovie_StaffCriteria.movie.eq();
+		//lmoviedb_classesMovie_StaffCriteria.staff.eq();
+		System.out.println(lmoviedb_classesMovie_StaffCriteria.uniqueMovie_Staff());
 		
 	}
 	

@@ -20,11 +20,6 @@ License Type: Academic
 		<property name="genre" column="Genre" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="synopsys" column="Synopsys" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="box_office" column="Box_office" type="float" not-null="true" lazy="false"/>
-		<set name="ORM_Participants" table="Movie_Staff" lazy="true" cascade="save-update,lock">
-			<key column="MovieId" not-null="true"/>
-			<many-to-many column="StaffId" class="moviedb_classes.Staff">
-			</many-to-many>
-		</set>
 		<set name="ORM_Movie_reviews" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="MovieId" not-null="true"/>
 			<one-to-many class="moviedb_classes.Review"/>
@@ -36,6 +31,10 @@ License Type: Academic
 		<set name="ORM_Rated" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="MovieId" not-null="true"/>
 			<one-to-many class="moviedb_classes.Ratings"/>
+		</set>
+		<set name="ORM_Participants" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="MovieId" not-null="true"/>
+			<one-to-many class="moviedb_classes.Movie_Staff"/>
 		</set>
 	</class>
 </hibernate-mapping>

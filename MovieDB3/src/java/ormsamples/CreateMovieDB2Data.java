@@ -10,7 +10,7 @@ public class CreateMovieDB2Data {
 		PersistentTransaction t = moviedb_classes.MovieDB2PersistentManager.instance().getSession().beginTransaction();
 		try {
 			moviedb_classes.Movie lmoviedb_classesMovie = moviedb_classes.MovieDAO.createMovie();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : rated, lists, movie_reviews, participants, box_office, rating, release_year, release_month, release_day, duration
+			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : participants, rated, lists, movie_reviews, box_office, rating, release_year, release_month, release_day, duration
 			moviedb_classes.MovieDAO.save(lmoviedb_classesMovie);
 			moviedb_classes.User lmoviedb_classesUser = moviedb_classes.UserDAO.createUser();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : evaluated, lists, user_reviews
@@ -27,6 +27,9 @@ public class CreateMovieDB2Data {
 			moviedb_classes.Ratings lmoviedb_classesRatings = moviedb_classes.RatingsDAO.createRatings();
 			// Initialize the properties of the persistent object here
 			moviedb_classes.RatingsDAO.save(lmoviedb_classesRatings);
+			moviedb_classes.Movie_Staff lmoviedb_classesMovie_Staff = moviedb_classes.Movie_StaffDAO.createMovie_Staff();
+			// Initialize the properties of the persistent object here
+			moviedb_classes.Movie_StaffDAO.save(lmoviedb_classesMovie_Staff);
 			t.commit();
 		}
 		catch (Exception e) {

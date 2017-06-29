@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidade do Minho
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="moviedb_classes.Movie_Staff" table="Movie_Staff" lazy="false">
+		<composite-id>
+			<key-many-to-one name="ORM_Movie" column="MovieId" class="moviedb_classes.Movie">
+			</key-many-to-one>
+			<key-many-to-one name="ORM_Staff" column="StaffId" class="moviedb_classes.Staff">
+			</key-many-to-one>
+		</composite-id>
+		<property name="role" column="role" type="string" length="255" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

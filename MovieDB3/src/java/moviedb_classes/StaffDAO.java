@@ -323,9 +323,9 @@ public class StaffDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.Staff staff)throws PersistentException {
 		try {
-			moviedb_classes.Movie[] lWorkeds = staff.worked.toArray();
+			moviedb_classes.Movie_Staff[] lWorkeds = staff.worked.toArray();
 			for(int i = 0; i < lWorkeds.length; i++) {
-				lWorkeds[i].participants.remove(staff);
+				lWorkeds[i].setStaff(null);
 			}
 			return delete(staff);
 		}
@@ -337,9 +337,9 @@ public class StaffDAO {
 	
 	public static boolean deleteAndDissociate(moviedb_classes.Staff staff, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			moviedb_classes.Movie[] lWorkeds = staff.worked.toArray();
+			moviedb_classes.Movie_Staff[] lWorkeds = staff.worked.toArray();
 			for(int i = 0; i < lWorkeds.length; i++) {
-				lWorkeds[i].participants.remove(staff);
+				lWorkeds[i].setStaff(null);
 			}
 			try {
 				session.delete(staff);

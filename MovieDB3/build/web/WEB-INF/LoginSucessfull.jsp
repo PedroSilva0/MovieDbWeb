@@ -104,8 +104,8 @@
                             <div class="row">
                                 <div id="home-stuff" class="col-lg-12">
                                     <div class="container">
-
-                                        <h4 style="padding-top: 100px"> Top Rated </h4>
+                                        <% String ref="Website_List?list_name=Top_Rated&bot_limit=0&user="+u.getUsername();%>
+                                        <h4 style="padding-top: 100px"> <a href=<%=ref%>>Top Rated </a> </h4>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div id="Carousel" class="carousel slide">
@@ -181,8 +181,8 @@
                                     <%} else {
                                         for (String list_name : user_lists.keySet()) {%>
                                     <div class="container">
-
-                                        <h4 style="padding-top: 50px"> <%=list_name%> </h4>
+                                        <% ref="User_Lists_Servlet?list_name="+list_name.replaceAll(" ","_")+"&bot_limit=0&user="+u.getUsername();%>
+                                        <h4 style="padding-top: 100px"> <a href=<%=ref%>><%=list_name%> </a> </h4>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div id="Carousel" class="carousel slide">

@@ -17,23 +17,23 @@ VALUES
 
 
 INSERT INTO `moviedb`.`staff`
-(`Id`,`Role`,`Name`,`Bio`,`Picture`)
+(`Id`,`Name`,`Bio`,`Picture`)
 VALUES
-(1,'Voice Actor','Will Arnett','Will Arnett is a Canadian-American actor, voice actor, and comedian.','images/staff/will_arnett.jpg'),
-(2,'Actress','Gal Gadot','Gal Gadot is an Israeli actress, martial artist, and model. She was born in Rosh Ha\'ayin, Israel, to a Jewish family (from Poland, Austria, Germany, and Czechoslovakia).','images/staff/gal_gadot.jpg'),
-(3,'Actor','Tom Cruise','Tom is the only son (among four children) of nomadic parents, Mary Lee (Pfeiffer), a special education teacher, and Thomas Cruise Mapother III, an electrical engineer.','images/staff/tom_cruise.jpg'),
-(4,'Actor','Keanu Reeves','Keanu Charles Reeves, whose first name means "cool breeze over the mountains" in Hawaiian, was born September 2, 1964 in Beirut, Lebanon. He is the son of Patricia Taylor, a showgirl and costume designer, and Samuel Nowlin Reeves, a geologist.','images/staff/keanu_reeves.jpg'),
-(5,'Actor','Daniel Kaluuya','Daniel Kaluuya was born in 1989 in London, England.','images/staff/daniel_kaluya.jpg'),
-(6,'Actor','Benedict Cumberbatch','Benedict Timothy Carlton Cumberbatch was born and raised in London, England. His parents, Wanda Ventham and Timothy Carlton (Timothy Carlton Congdon Cumberbatch), are both actors.','images/staff/benedict_cumberbatch.jpg'),
-(7,'Voice Actress','Auli\'i Cravalho','Auli\'i Cravalho was born on November 22, 2000 in Kohala, Hawaii, USA.','images/staff/auli_cravalho.jpg'),
-(8,'Actor','Eddie Redmayne','British actor Eddie Redmayne is the first, and thus far only, millennial male to have won an acting Oscar.Edward John David Redmayne was born and raised in London, England, the son of Patricia (Burke) and Richard Redmayne, a businessman.','images/staff/eddie_redmayne.jpg'),
-(9,'Actress','Amy Adams','Amy Lou Adams was born in Vicenza, Veneto, Italy, to American parents, Kathryn (Hicken) and Richard Kent Adams, a U.S. serviceman who was stationed at Caserma Ederle in Italy at the time.','images/staff/amy_adams.jpg'),
-(10,'Actress','Taraji Henson','Taraji P. Henson was born on September 11, 1970 in Washington, District of Columbia, USA as Taraji Penda Henson.','images/staff/taraji_henson.jpg');
+(1,'Will Arnett','Will Arnett is a Canadian-American actor, voice actor, and comedian.','images/staff/will_arnett.jpg'),
+(2,'Gal Gadot','Gal Gadot is an Israeli actress, martial artist, and model. She was born in Rosh Ha\'ayin, Israel, to a Jewish family (from Poland, Austria, Germany, and Czechoslovakia).','images/staff/gal_gadot.jpg'),
+(3,'Tom Cruise','Tom is the only son (among four children) of nomadic parents, Mary Lee (Pfeiffer), a special education teacher, and Thomas Cruise Mapother III, an electrical engineer.','images/staff/tom_cruise.jpg'),
+(4,'Keanu Reeves','Keanu Charles Reeves, whose first name means "cool breeze over the mountains" in Hawaiian, was born September 2, 1964 in Beirut, Lebanon. He is the son of Patricia Taylor, a showgirl and costume designer, and Samuel Nowlin Reeves, a geologist.','images/staff/keanu_reeves.jpg'),
+(5,'Daniel Kaluuya','Daniel Kaluuya was born in 1989 in London, England.','images/staff/daniel_kaluya.jpg'),
+(6,'Benedict Cumberbatch','Benedict Timothy Carlton Cumberbatch was born and raised in London, England. His parents, Wanda Ventham and Timothy Carlton (Timothy Carlton Congdon Cumberbatch), are both actors.','images/staff/benedict_cumberbatch.jpg'),
+(7,'Auli\'i Cravalho','Auli\'i Cravalho was born on November 22, 2000 in Kohala, Hawaii, USA.','images/staff/auli_cravalho.jpg'),
+(8,'Eddie Redmayne','British actor Eddie Redmayne is the first, and thus far only, millennial male to have won an acting Oscar.Edward John David Redmayne was born and raised in London, England, the son of Patricia (Burke) and Richard Redmayne, a businessman.','images/staff/eddie_redmayne.jpg'),
+(9,'Amy Adams','Amy Lou Adams was born in Vicenza, Veneto, Italy, to American parents, Kathryn (Hicken) and Richard Kent Adams, a U.S. serviceman who was stationed at Caserma Ederle in Italy at the time.','images/staff/amy_adams.jpg'),
+(10,'Taraji Henson','Taraji P. Henson was born on September 11, 1970 in Washington, District of Columbia, USA as Taraji Penda Henson.','images/staff/taraji_henson.jpg');
 
 INSERT INTO `moviedb`.`user`
 (`Id`,`Username`,`Password`,`Avatar`,`Email`)
 VALUES
-(1,'user1','pass1','images/avatar/default.png','mail@mail.com'),
+(1,'user1','pass1','images/avatar/default.jpg','mail@mail.com'),
 (2,'user2','pass2','images/avatars/user2_avatar.png','mail2@mail.com');
 
 INSERT INTO `moviedb`.`review`
@@ -44,18 +44,18 @@ VALUES
 (3,9,2,'Made me ponder how we comunicate',8,8,7,8,8);
 
 INSERT INTO `moviedb`.`movie_staff`
-(`MovieId`,`StaffId`)
+(`MovieId`,`StaffId`,`role`)
 VALUES
-(1,1),
-(2,2),
-(3,3),
-(4,4),
-(5,5),
-(6,6),
-(7,7),
-(8,8),
-(9,9),
-(10,10);
+(1,1,'Voice Actor'),
+(2,2,'Actress'),
+(3,3,'Actor'),
+(4,4,'Actor'),
+(5,5,'Actor'),
+(6,6,'Actor'),
+(7,7,'Voice Actress'),
+(8,8,'Actress'),
+(9,9,'Actress'),
+(10,10,'Actress');
 
 INSERT INTO `moviedb`.`ratings`
 (`UserId`,`MovieId`,`rating`)

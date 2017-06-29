@@ -17,6 +17,7 @@ License Type: Academic
     <!-- mapping files -->
     <mapping resource="ormmapping/moviedb_classes/Lists.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Movie.hbm.xml"/>
+    <mapping resource="ormmapping/moviedb_classes/Movie_Staff.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Ratings.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Review.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Staff.hbm.xml"/>

@@ -18,6 +18,10 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	
 	final int KEY_LISTS_USER = -1039658411;
 	
+	final int KEY_MOVIE_STAFF_MOVIE = 1513028162;
+	
+	final int KEY_MOVIE_STAFF_STAFF = 1518697970;
+	
 	final int KEY_MOVIE_LISTS = 782076326;
 	
 	final int KEY_MOVIE_MOVIE_REVIEWS = 335097629;

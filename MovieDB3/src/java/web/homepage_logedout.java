@@ -43,7 +43,7 @@ public class homepage_logedout extends HttpServlet {
         List<Movie> r = new ArrayList<Movie>();
         
         //System.out.println("entrei");
-        r= MovieDB.list_all_movies();
+        r= MovieDB.list_top_rated_movies();
         
         
         request.setAttribute("top_movies", r);

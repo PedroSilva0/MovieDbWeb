@@ -57,6 +57,14 @@ public class ListMovieDB2Data {
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
+		System.out.println("Listing Movie_Staff...");
+		moviedb_classes.Movie_Staff[] moviedb_classesMovie_Staffs = moviedb_classes.Movie_StaffDAO.listMovie_StaffByQuery(null, null);
+		length = Math.min(moviedb_classesMovie_Staffs.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(moviedb_classesMovie_Staffs[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
 	}
 	
 	public void listByCriteria() throws PersistentException {
@@ -137,6 +145,21 @@ public class ListMovieDB2Data {
 			 System.out.println(moviedb_classesRatingses[i]);
 		}
 		System.out.println(length + " Ratings record(s) retrieved."); 
+		
+		System.out.println("Listing Movie_Staff by Criteria...");
+		moviedb_classes.Movie_StaffCriteria lmoviedb_classesMovie_StaffCriteria = new moviedb_classes.Movie_StaffCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//moviedb_classes.MovieCriteria lmoviedb_classesMovie_StaffCriteria_Movie = lmoviedb_classesMovie_StaffCriteria.createMovieCriteria();
+		//lmoviedb_classesMovie_StaffCriteria_Movie.id.eq();
+		//moviedb_classes.StaffCriteria lmoviedb_classesMovie_StaffCriteria_Staff = lmoviedb_classesMovie_StaffCriteria.createStaffCriteria();
+		//lmoviedb_classesMovie_StaffCriteria_Staff.id.eq();
+		lmoviedb_classesMovie_StaffCriteria.setMaxResults(ROW_COUNT);
+		moviedb_classes.Movie_Staff[] moviedb_classesMovie_Staffs = lmoviedb_classesMovie_StaffCriteria.listMovie_Staff();
+		length =moviedb_classesMovie_Staffs== null ? 0 : Math.min(moviedb_classesMovie_Staffs.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(moviedb_classesMovie_Staffs[i]);
+		}
+		System.out.println(length + " Movie_Staff record(s) retrieved."); 
 		
 	}
 	

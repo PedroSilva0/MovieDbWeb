@@ -34,8 +34,6 @@ public class Staff {
 	
 	private int id;
 	
-	private String role;
-	
 	private String name;
 	
 	private String bio;
@@ -54,14 +52,6 @@ public class Staff {
 	
 	public int getORMID() {
 		return getId();
-	}
-	
-	public void setRole(String value) {
-		this.role = value;
-	}
-	
-	public String getRole() {
-		return role;
 	}
 	
 	public void setName(String value) {
@@ -96,7 +86,7 @@ public class Staff {
 		return ORM_worked;
 	}
 	
-	public final moviedb_classes.MovieSetCollection worked = new moviedb_classes.MovieSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_STAFF_WORKED, moviedb_classes.ORMConstants.KEY_MOVIE_PARTICIPANTS, moviedb_classes.ORMConstants.KEY_MUL_MANY_TO_MANY);
+	public final moviedb_classes.Movie_StaffSetCollection worked = new moviedb_classes.Movie_StaffSetCollection(this, _ormAdapter, moviedb_classes.ORMConstants.KEY_STAFF_WORKED, moviedb_classes.ORMConstants.KEY_MOVIE_STAFF_STAFF, moviedb_classes.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

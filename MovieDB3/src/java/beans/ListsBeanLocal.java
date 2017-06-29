@@ -17,5 +17,9 @@ import moviedb_classes.Lists;
 public interface ListsBeanLocal {
     
     public List<Lists> get_user_lists(int user_id);
+
+    public List<Lists> get_list(int id, String list_type);
+
+    public void remove_from_list(int user_id, int movie_id, String list_type);
     
 }

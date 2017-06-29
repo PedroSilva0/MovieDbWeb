@@ -20,7 +20,6 @@ import org.orm.criteria.*;
 
 public class StaffDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
-	public final StringExpression role;
 	public final StringExpression name;
 	public final StringExpression bio;
 	public final StringExpression picture;
@@ -29,7 +28,6 @@ public class StaffDetachedCriteria extends AbstractORMDetachedCriteria {
 	public StaffDetachedCriteria() {
 		super(moviedb_classes.Staff.class, moviedb_classes.StaffCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		role = new StringExpression("role", this.getDetachedCriteria());
 		name = new StringExpression("name", this.getDetachedCriteria());
 		bio = new StringExpression("bio", this.getDetachedCriteria());
 		picture = new StringExpression("picture", this.getDetachedCriteria());
@@ -39,15 +37,14 @@ public class StaffDetachedCriteria extends AbstractORMDetachedCriteria {
 	public StaffDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, moviedb_classes.StaffCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		role = new StringExpression("role", this.getDetachedCriteria());
 		name = new StringExpression("name", this.getDetachedCriteria());
 		bio = new StringExpression("bio", this.getDetachedCriteria());
 		picture = new StringExpression("picture", this.getDetachedCriteria());
 		worked = new CollectionExpression("ORM_Worked", this.getDetachedCriteria());
 	}
 	
-	public MovieDetachedCriteria createWorkedCriteria() {
-		return new MovieDetachedCriteria(createCriteria("ORM_Worked"));
+	public Movie_StaffDetachedCriteria createWorkedCriteria() {
+		return new Movie_StaffDetachedCriteria(createCriteria("ORM_Worked"));
 	}
 	
 	public Staff uniqueStaff(PersistentSession session) {

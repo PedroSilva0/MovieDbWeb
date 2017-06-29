@@ -20,7 +20,6 @@ import org.orm.criteria.*;
 
 public class StaffCriteria extends AbstractORMCriteria {
 	public final IntegerExpression id;
-	public final StringExpression role;
 	public final StringExpression name;
 	public final StringExpression bio;
 	public final StringExpression picture;
@@ -29,7 +28,6 @@ public class StaffCriteria extends AbstractORMCriteria {
 	public StaffCriteria(Criteria criteria) {
 		super(criteria);
 		id = new IntegerExpression("id", this);
-		role = new StringExpression("role", this);
 		name = new StringExpression("name", this);
 		bio = new StringExpression("bio", this);
 		picture = new StringExpression("picture", this);
@@ -44,8 +42,8 @@ public class StaffCriteria extends AbstractORMCriteria {
 		this(moviedb_classes.MovieDB2PersistentManager.instance().getSession());
 	}
 	
-	public MovieCriteria createWorkedCriteria() {
-		return new MovieCriteria(createCriteria("ORM_Worked"));
+	public Movie_StaffCriteria createWorkedCriteria() {
+		return new Movie_StaffCriteria(createCriteria("ORM_Worked"));
 	}
 	
 	public Staff uniqueStaff() {
