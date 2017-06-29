@@ -15,7 +15,9 @@ License Type: Academic
     <property name="show_sql">false</property>
     <property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
     <!-- mapping files -->
+    <mapping resource="ormmapping/moviedb_classes/Lists.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Movie.hbm.xml"/>
+    <mapping resource="ormmapping/moviedb_classes/Ratings.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Review.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/Staff.hbm.xml"/>
     <mapping resource="ormmapping/moviedb_classes/User.hbm.xml"/>
