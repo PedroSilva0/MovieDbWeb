@@ -133,7 +133,7 @@
                                                 Movie m = top_movies.get(i);%>
                                                                 <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
-                                                                        <a href="#"><%=m.getTitle()%></a>
+                                                                        <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>
                                                                     </div>
                                                                 </div>
 
@@ -230,7 +230,7 @@
 
                                                                 <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
-                                                                        <a href="#"><%=m.getTitle()%></a>
+                                                                        <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>
                                                                     </div>
                                                                 </div>
 

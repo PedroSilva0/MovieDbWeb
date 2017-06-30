@@ -6,19 +6,23 @@
 package web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import moviedb_classes.Movie;
+import moviedb_classes.MovieDB;
+import moviedb_classes.Staff;
+import moviedb_classes.User;
 
 /**
  *
- * @author Utilizador
+ * @author adt
  */
-@WebServlet(name = "DisplayImageServlet", urlPatterns = {"/DisplayImageServlet"})
-public class DisplayImageServlet extends HttpServlet {
+@WebServlet(name = "movie_details", urlPatterns = {"/movie_details"})
+public class movie_details extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +35,17 @@ public class DisplayImageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DisplayImageServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DisplayImageServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String id = request.getParameter("id");
+        
+        Movie m = MovieDB.getMovieById(id);
+        request.setAttribute("movie",m);
+        String userId = request.getParameter("user");
+        User u = null;
+        if(userId != null) u = MovieDB.getUserById(userId);
+        request.setAttribute("user",u);
+        List<Staff> actors = MovieDB.getMovieCast(id);
+        request.setAttribute("cast",actors);
+        request.getRequestDispatcher("/WEB-INF/movie_details.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

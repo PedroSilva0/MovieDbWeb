@@ -64,6 +64,19 @@ public class MovieBean implements MovieBeanLocal {
         }
         return r;
     }
+    
+    @Override
+    public Movie getMovieByORMID(String id) {
+        Movie movie = null;
+        try{
+            movie = MovieDAO.getMovieByORMID(Integer.parseInt(id));
+        }
+        catch (Exception e) {
+                e.printStackTrace();
+        }
+        return movie;
+    }
+    
   
     
    

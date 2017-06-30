@@ -22,4 +22,6 @@ public interface MovieBeanLocal {
     public List<Movie> list_top_rated_movies();
 
     public List<Movie> list_movies_by_year();
+    
+    public Movie getMovieByORMID(String id);
 }

@@ -7,16 +7,15 @@ package moviedb_classes;
 
 //import Beans.MovieBeanLocal;
 import beans.ListsBeanLocal;
+import beans.MovieBean;
 import beans.MovieBeanLocal;
 import beans.RatingsBeanLocal;
 import beans.UserBeanLocal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -26,6 +25,7 @@ import java.util.regex.Pattern;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.orm.PersistentException;
 /**
  *
  * @author Utilizador
@@ -55,6 +55,14 @@ public class MovieDB {
             res=res.subList(0, 54);
         }
         return res;
+    }
+    
+    public static Movie getMovieById(String id){
+        return movieBean.getMovieByORMID(id);
+    }
+    
+    public static User getUserById(String id){
+        return userBean.getUserById(id);
     }
     
     public static List<Movie> list_coming_soon_movies(){
@@ -261,6 +269,17 @@ public class MovieDB {
         listsBean.remove_from_list(user_id,movie_id,list_type);
     }
 
+    public static List<Staff> getMovieCast(String movieId){
+        List<Staff> actors = new ArrayList<>();
+        try {
+            List<Integer> actorIds = Movie_StaffDAO.queryMovie_Staff("MovieId="+movieId,"StaffId");
+            for(int actorId : actorIds)
+                actors.add(StaffDAO.getStaffByORMID(actorId));
+        } catch (PersistentException ex) {
+            Logger.getLogger(MovieDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return actors;
+    }
     
     
     

@@ -6,13 +6,8 @@
 package web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +17,6 @@ import moviedb_classes.Movie;
 import moviedb_classes.MovieDB;
 import moviedb_classes.Ratings;
 import moviedb_classes.User;
-import moviedb_classes.UserDAO;
-import org.orm.PersistentException;
 
 /**
  *
@@ -50,8 +43,7 @@ public class LoginServlet extends HttpServlet {
             
             if(u!=null){
                 request.setAttribute("user", u);
-                List<Movie> r = new ArrayList<Movie>();
-                r= MovieDB.list_all_movies();
+                List<Movie> r= MovieDB.list_all_movies();
                 Map<String,List<Movie>> lists= MovieDB.get_user_lists(u);
                 List<Ratings> ratings=MovieDB.get_user_ratings(u);
                 request.setAttribute("ratings",ratings);

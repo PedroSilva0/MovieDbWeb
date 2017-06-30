@@ -48,7 +48,7 @@ public class UserBean implements UserBeanLocal {
     
     
       
-   private static PersistentSession getSession() {
+    private static PersistentSession getSession() {
         if (session == null) {
             try {
                 session = MovieDB2PersistentManager.instance().getSession();
@@ -58,4 +58,15 @@ public class UserBean implements UserBeanLocal {
         }
         return session;
     }
+   
+    @Override
+    public User getUserById(String id){
+       User u = null;
+       try {
+           u = UserDAO.getUserByORMID(Integer.parseInt(id));
+       } catch (PersistentException ex) {
+           Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return u;
+   }
 }
