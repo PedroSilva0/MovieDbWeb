@@ -62,7 +62,7 @@ public class ListsBean implements ListsBeanLocal {
             r=t;
             //session.refresh(t);
             /* experimentar 
-            session.evict();
+            session.evict(t);
             session.clear();
             */
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class ListsBean implements ListsBeanLocal {
          try {
              r = ListsDAO.queryLists(session_aux,"userid="+user_id+"and list_name='"+list_type+"' and movieid="+movie_id, "userid");
              System.out.println("vou apagar");
-             ListsDAO.deleteAndDissociate(r.get(0),session_aux);
+             ListsDAO.delete(r.get(0));
          } catch (PersistentException ex) {
              System.out.println("delete falhou");
          }
