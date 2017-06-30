@@ -55,9 +55,16 @@ public class ListsBean implements ListsBeanLocal {
     public List<Lists> get_list(int id, String list_type) {
         PersistentSession session_aux=this.getSession();
         List<Lists> r = null;
+        List<Lists> t = null;
         try {
-            r = ListsDAO.queryLists(session_aux,"userid="+id+"and list_name='"+list_type+"'", "userid");
-            
+            //session_aux.refresh(r);
+            t = ListsDAO.queryLists(session_aux,"userid="+id+"and list_name='"+list_type+"'", "userid");
+            r=t;
+            //session.refresh(t);
+            /* experimentar 
+            session.evict();
+            session.clear();
+            */
         } catch (Exception e) {
             System.out.println("didnt get any lists");
         }
@@ -71,9 +78,9 @@ public class ListsBean implements ListsBeanLocal {
          try {
              r = ListsDAO.queryLists(session_aux,"userid="+user_id+"and list_name='"+list_type+"' and movieid="+movie_id, "userid");
              System.out.println("vou apagar");
-             ListsDAO.delete(r.get(0));
+             ListsDAO.deleteAndDissociate(r.get(0),session_aux);
          } catch (PersistentException ex) {
-             System.out.println("dele falhou");
+             System.out.println("delete falhou");
          }
     }
     

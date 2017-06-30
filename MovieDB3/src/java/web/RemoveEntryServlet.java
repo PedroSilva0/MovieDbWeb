@@ -38,7 +38,8 @@ public class RemoveEntryServlet extends HttpServlet {
             throws ServletException, IOException {
         int user_id=Integer.parseInt(request.getParameter("user_id"));
         int movie_id=Integer.parseInt(request.getParameter("movie_id"));
-        String list_type = request.getParameter("list_name");
+        String list_type = request.getParameter("list_name").replace("_"," ");
+        System.out.println("vou remover");
         MovieDB.remove_from_list(user_id,movie_id,list_type);
         
         
