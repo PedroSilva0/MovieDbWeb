@@ -33,6 +33,8 @@ import org.orm.PersistentException;
  */
 public class MovieDB {
 
+    static MovieStaffBeanLocal movieStaffBean = lookupMovieStaffBeanLocal();
+
     static RatingsBeanLocal ratingsBean = lookupRatingsBeanLocal();
 
     static ListsBeanLocal listsBean = lookupListsBeanLocal();
@@ -40,8 +42,6 @@ public class MovieDB {
     static UserBeanLocal userBean = lookupUserBeanLocal();
 
     static MovieBeanLocal movieBean = lookupMovieBeanLocal();
-
-    static MovieStaffBeanLocal movieStaffBean = lookupMovieStaffBeanLocal();
 
    
     
@@ -154,15 +154,7 @@ public class MovieDB {
         }
     }
     
-    private static MovieStaffBeanLocal lookupMovieStaffBeanLocal() {
-        try {
-            Context c = new InitialContext();
-            return (MovieStaffBeanLocal) c.lookup("java:global/MovieDB3/MovieBean!beans.MovieStaffBeanLocal");
-        } catch (NamingException ne) {
-            System.out.println("Erro no bean");
-            throw new RuntimeException(ne);
-        }
-    }
+    
 
     public static int register(String user, String email, String pwd, String pwd2) {
         System.out.println("pass: "+ pwd+" pass2: "+pwd2 );
@@ -282,9 +274,19 @@ public class MovieDB {
 
     public static List<Staff> getMovieCast(String movieId){
         List<Staff> actors = new ArrayList<>();
-        List<Movie_Staff> records = movieStaffBean.getMovieCast("Movie_Staff.MovieId="+movieId,"Movie_Staff.StaffId");
+        List<Movie_Staff> records = movieStaffBean.getMovieCast("movieId="+movieId,"staffId");
         for(Movie_Staff ms : records)
             actors.add(ms.getStaff());
         return actors;
     } 
+
+    private static MovieStaffBeanLocal lookupMovieStaffBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (MovieStaffBeanLocal) c.lookup("java:global/MovieDB3/MovieStaffBean!beans.MovieStaffBeanLocal");
+        } catch (NamingException ne) {
+            System.out.println("erro no moviestaff bean");
+            throw new RuntimeException(ne);
+        }
+    }
 }

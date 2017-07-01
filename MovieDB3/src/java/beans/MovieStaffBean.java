@@ -27,7 +27,6 @@ public class MovieStaffBean implements MovieStaffBeanLocal {
         List<Movie_Staff> r = null;
         try {
             r = Movie_StaffDAO.queryMovie_Staff(session_aux,condition,orderBy);
-            
         } catch (Exception e) {
             System.out.println("didnt get any movies");
         }
