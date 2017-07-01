@@ -4,14 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/ormmapping/MovieDB2.cfg.xml</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/ListsBean.java</file>
             <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/web/Index.java</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/web/RemoveEntryServlet.java</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/web/WEB-INF/User_Lists.jsp</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/web/User_Lists_Servlet.java</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/moviedb_classes/ListsDAO.java</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/MovieBeanLocal.java</file>
-            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/moviedb_classes/MovieDB.java</file>
+            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/ListsBean.java</file>
+            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/RatingsBean.java</file>
+            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/UserBean.java</file>
+            <file>file:/C:/Users/Utilizador/Desktop/Universidade/4ano/EA/TP_GIT/MovieDbWeb/MovieDB3/src/java/beans/MovieBean.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,8 +6,7 @@
 package web;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDB;
-import moviedb_classes.Ratings;
-import moviedb_classes.User;
 
 /**
  *
  * @author Utilizador
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "Search_Servlet", urlPatterns = {"/Search_Servlet"})
+public class Search_Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +34,16 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
-            String user = request.getParameter("username");
-            String pwd = request.getParameter("password");
-            if(request.getParameter("log_state")!=null){
-            int log_state= Integer.parseInt(request.getParameter("log_state"));
-                if(log_state==1){
-                    User aux=MovieDB.get_user(user);
-                    request.setAttribute("user", aux);
-                    List<Movie> r= MovieDB.list_all_movies();
-                    Map<String,List<Movie>> lists= MovieDB.get_user_lists(aux);
-                    List<Ratings> ratings=MovieDB.get_user_ratings(aux);
-                    request.setAttribute("ratings",ratings);
-                    request.setAttribute("lists",lists);
-                    request.setAttribute("top_movies", r);
-                    request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
-                }
-            }else{
-            
-            
-            User u=MovieDB.login(user, pwd);
-            
-            
-            if(u!=null){
-                request.setAttribute("user", u);
-                List<Movie> r= MovieDB.list_all_movies();
-                Map<String,List<Movie>> lists= MovieDB.get_user_lists(u);
-                List<Ratings> ratings=MovieDB.get_user_ratings(u);
-                request.setAttribute("ratings",ratings);
-                request.setAttribute("lists",lists);
-                request.setAttribute("top_movies", r);
-                request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
-            }else{
-                request.setAttribute("log_state", -1);
-                request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
-            }
-            }
-            
+        String movie_name=request.getParameter("movie_title");
+        String user=request.getParameter("user");
+        Movie m=MovieDB.get_movie(movie_name);
+        if(user!=null){
+            request.getRequestDispatcher("movie_details?id="+m.getId()+"&user="+user).forward(request, response);
+        }else{
+        request.getRequestDispatcher("movie_details?id="+m.getId()).forward(request, response);
+        }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

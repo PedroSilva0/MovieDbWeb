@@ -41,10 +41,10 @@
             <div class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="homepage_logedout">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-                        <a class="navbar-brand" href="#" style="padding-top:15px">
+                        <a class="navbar-brand" href="homepage_logedout" style="padding-top:15px">
                             MovieDB
                         </a>
                     </div>
@@ -53,11 +53,15 @@
                             <input type="submit" name="login" class="btn btn-default" value="Login">
                             <input type="submit" name="register" class="btn btn-default" value="Register">
                         </form>
-                        <form class="navbar-form" id="search">
+                        <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
                             <div class="form-group" style="display:inline;">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Search movie title">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
                                 </div>
                             </div>
                         </form>
@@ -67,7 +71,7 @@
             </div>
             <div class="container">
 
-                <h4 style="padding-top: 100px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
+                <h4 style="padding-top: 50px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="Carousel" class="carousel slide">
@@ -93,7 +97,7 @@
                                             int max_page = i + 6;
                                             for (i = 0; i < top_movies.size() && i < max_page; i++) {
                                         Movie m = top_movies.get(i);%>
-                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
                                             <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
                                         </div>
@@ -116,9 +120,9 @@
                                             for (i = i; i < top_movies.size() && i < max_page; i++) {
                                             Movie m = top_movies.get(i);%>
 
-                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href="#"><%=m.getTitle()%></a>
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -127,8 +131,10 @@
                                 </div><!--.item-->
                                 <%}%>
                             </div><!--.carousel-inner-->
+                            <%if(top_movies.size()>6){%>
                             <a data-slide="prev" href="#Carousel" class="left carousel-control"><</a>
                             <a data-slide="next" href="#Carousel" class="right carousel-control">></a>
+                            <%}%>
                         </div><!--.Carousel-->
 
                     </div>

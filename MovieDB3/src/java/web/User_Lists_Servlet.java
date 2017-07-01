@@ -41,13 +41,17 @@ public class User_Lists_Servlet extends HttpServlet {
         User u=MovieDB.get_user(username);
         System.out.println(u.getUsername());
         System.out.println(u.getPassword());
-        String list_type = request.getParameter("list_name").toString().replaceAll("_", " ");
+        String list_type = request.getParameter("list_name").toString().replaceAll("_"," ");
+        System.out.println("antes de pedir: "+list_type);
         int start_point=Integer.parseInt(request.getParameter("bot_limit"));
         List<Movie> r = new ArrayList<Movie>();
         
         
         //System.out.println("entrei");
         r= MovieDB.list_user_list(start_point,u.getId(),list_type);
+        for(Movie m:r){
+            System.out.println(m.getTitle());
+        }
         
         
         request.setAttribute("list", r);

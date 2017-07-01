@@ -18,6 +18,23 @@ html {
   margin-left: 25%;
 }
 
+.submit-with-icon {
+  background: transparent;
+    border: 0px;
+    padding: 0;
+    outline: 0;
+}
+
+.icon-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+
 body, html{
      height: 100%;
   background-repeat: no-repeat;
@@ -70,4 +87,3 @@ background: #428bca;
 .carousel-control.right {
   margin-right: -25px;
 }
-

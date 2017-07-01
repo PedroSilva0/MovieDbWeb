@@ -166,7 +166,7 @@ public class MovieDB {
             return -3;
         }
         User new_user= new User();
-        new_user.setAvatar("/image/avatar/default.png");
+        new_user.setAvatar("images/avatars/user2_avatar.png");
         new_user.setEmail(email);
         new_user.setPassword(pwd2);
         new_user.setUsername(user);
@@ -267,6 +267,8 @@ public class MovieDB {
 
     public static void remove_from_list(int user_id, int movie_id, String list_type) {
         listsBean.remove_from_list(user_id,movie_id,list_type);
+        movieBean.clear();
+        userBean.clear();
     }
 
     public static List<Staff> getMovieCast(String movieId){
@@ -279,6 +281,10 @@ public class MovieDB {
             Logger.getLogger(MovieDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return actors;
+    }
+
+    public static Movie get_movie(String movie_name) {
+        return movieBean.getMovie(movie_name);
     }
     
     

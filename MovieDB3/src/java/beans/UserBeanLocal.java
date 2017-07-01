@@ -19,4 +19,6 @@ public interface UserBeanLocal {
     public void register_user(User u);
     
     public User getUserById(String id);
+
+    public void clear();
 }
