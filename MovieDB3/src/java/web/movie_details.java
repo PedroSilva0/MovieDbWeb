@@ -6,6 +6,7 @@
 package web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,6 +46,8 @@ public class movie_details extends HttpServlet {
         request.setAttribute("user",u);
         List<Staff> actors = MovieDB.getMovieCast(id);
         request.setAttribute("cast",actors);
+        List<String> l = new ArrayList<>();
+        for(Staff s : actors) l.add(s.getName()+" ");
         request.getRequestDispatcher("/WEB-INF/movie_details.jsp").forward(request, response);
     }
 

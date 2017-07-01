@@ -164,7 +164,7 @@ public class Movie_StaffDAO {
 	}
 	
 	public static List queryMovie_Staff(PersistentSession session, String condition, String orderBy) throws PersistentException {
-		StringBuffer sb = new StringBuffer("StaffId From moviedb_classes.Movie_Staff as Movie_Staff");
+		StringBuffer sb = new StringBuffer("From moviedb_classes.Movie_Staff as Movie_Staff");
 		if (condition != null)
 			sb.append(" Where ").append(condition);
 		if (orderBy != null)

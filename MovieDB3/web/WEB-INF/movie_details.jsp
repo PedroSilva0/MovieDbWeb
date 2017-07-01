@@ -133,13 +133,17 @@
                             <div class="panel-body">
                                 <% Movie movie = (Movie)request.getAttribute("movie");%>
                                 <div class="row">
-                                    <div class="col-md-3"><h1><%= movie.getTitle()%></h1></div>
-                                    <div class="col-md-9" style="position:relative; top:30px">Rating</div>
+                                    <div class="col-md-12">
+                                        <h1 style="display: inline-block"><%= movie.getTitle()%></h1>
+                                        <span style="margin-left: 15px" class="star-ratings-css"><span style="color: #000"><%=movie.getRating()%>  <span style="color: #FF6701">★</span></span></span>
+                                    </div>
                                 </div>
                                 <div class="row" style="margin-top:10px">
-                                    <div class="col-md-2"><%= "Duration: "+ movie.getDuration()+" min"%></div>
-                                    <div class="col-md-1"><%= movie.getGenre()%></div>
-                                    <div class="col-md-9"><%= movie.getRelease_day()+"/"+movie.getRelease_month()+"/"+movie.getRelease_year()%></div>
+                                    <div class="col-md-12">
+                                        <%= "Duration: "+ movie.getDuration()+" min"%>
+                                        <span style="margin-left: 40px"><%= movie.getGenre()%></span>
+                                        <span style="margin-left: 40px"><%= movie.getRelease_day()+"/"+movie.getRelease_month()+"/"+movie.getRelease_year()%></span>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -157,8 +161,13 @@
                                 <div class="row" style="margin-top:10px">
                                     <div class="col-md-3"><span style="font-weight: bold">Cast:></span></div>
                                     <div class="col-md-9">
-                                        <% for(Staff actor: (List<Staff>)request.getAttribute("cast")) {%>
-                                            <a href="#"><%= actor.getName()+" " %></a>
+                                        <% List<Staff> actors = (List<Staff>)request.getAttribute("cast"); %>
+                                        <% for(int i=0;i<actors.size();i++) {%>
+                                            <% if(i<actors.size()-1){ %>
+                                                <a href="#"><%= actors.get(i).getName()+", " %></a>
+                                            <% }else{ %>
+                                                <a href="#"><%= actors.get(i).getName() %></a>
+                                            <% } %>
                                         <% } %>
                                     </div>
                                 </div>

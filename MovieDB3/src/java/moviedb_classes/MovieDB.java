@@ -9,6 +9,7 @@ package moviedb_classes;
 import beans.ListsBeanLocal;
 import beans.MovieBean;
 import beans.MovieBeanLocal;
+import beans.MovieStaffBeanLocal;
 import beans.RatingsBeanLocal;
 import beans.UserBeanLocal;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class MovieDB {
 
     static MovieBeanLocal movieBean = lookupMovieBeanLocal();
 
-   
+    static MovieStaffBeanLocal movieStaffBean = lookupMovieStaffBeanLocal();
 
    
     
@@ -149,6 +150,16 @@ public class MovieDB {
             return (UserBeanLocal) c.lookup("java:global/MovieDB3/UserBean!beans.UserBeanLocal");
         } catch (NamingException ne) {
             System.out.println("erro no beans de user");
+            throw new RuntimeException(ne);
+        }
+    }
+    
+    private static MovieStaffBeanLocal lookupMovieStaffBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (MovieStaffBeanLocal) c.lookup("java:global/MovieDB3/MovieBean!beans.MovieStaffBeanLocal");
+        } catch (NamingException ne) {
+            System.out.println("Erro no bean");
             throw new RuntimeException(ne);
         }
     }
@@ -271,19 +282,9 @@ public class MovieDB {
 
     public static List<Staff> getMovieCast(String movieId){
         List<Staff> actors = new ArrayList<>();
-        try {
-            List<Integer> actorIds = Movie_StaffDAO.queryMovie_Staff("MovieId="+movieId,"StaffId");
-            for(int actorId : actorIds)
-                actors.add(StaffDAO.getStaffByORMID(actorId));
-        } catch (PersistentException ex) {
-            Logger.getLogger(MovieDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        List<Movie_Staff> records = movieStaffBean.getMovieCast("Movie_Staff.MovieId="+movieId,"Movie_Staff.StaffId");
+        for(Movie_Staff ms : records)
+            actors.add(ms.getStaff());
         return actors;
-    }
-    
-    
-    
-
-    
-    
+    } 
 }

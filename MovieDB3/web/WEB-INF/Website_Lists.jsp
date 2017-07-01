@@ -41,9 +41,14 @@
 
     </head>
     <body>
-
+        <% String requestRoute = null;
+           User u = null;
+           boolean loggedIn = false;
+        %>
         <% if(request.getAttribute("user")!=null){
-            User u = (User) request.getAttribute("user");%>
+            u = (User) request.getAttribute("user");
+            loggedIn = true;
+        %>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -143,10 +148,13 @@
                           for (Movie m : movies) {%>
                                     <tr>
                                         <td>
-                                            <strong><%=start_point + 1%></strong>
+                                            <strong style="text-align: center"><%=start_point + 1%></strong>
                                         </td>
-                                        <td><a href="" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
-                                        <td><a href=""><%=m.getTitle()%></a> </td>
+                                        <% if(loggedIn) requestRoute = "/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId();
+                                           else requestRoute = "/MovieDB3/movie_details?id="+m.getId();
+                                        %>
+                                        <td><a href="<%= requestRoute%>" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
+                                        <td><h6><%=m.getTitle()%></h6></td>
                                         <td><div class="star-ratings-css">
                                                 <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #FF6701">★</span></span></div>
                                             </div>

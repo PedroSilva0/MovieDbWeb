@@ -131,9 +131,9 @@
                                                                     int max_page = i + 6;
                                                                     for (i = 0; i < top_movies.size() && i < max_page; i++) {
                                                 Movie m = top_movies.get(i);%>
-                                                                <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                                                <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
-                                                                        <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>
+                                                                        <h4 style="text-align: center"><%=m.getTitle()%></h4>
                                                                     </div>
                                                                 </div>
 
@@ -154,9 +154,9 @@
                                                                     for (i = i; i < top_movies.size() && i < max_page; i++) {
                                                 Movie m = top_movies.get(i);%>
 
-                                                                <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                                                <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
-                                                                        <a href="#"><%=m.getTitle()%></a>
+                                                                        <h4 style="text-align: center"><%=m.getTitle()%></h4>
                                                                     </div>
                                                                 </div>
 

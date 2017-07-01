@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="container">
-
+                <div style="position:relative">
                 <h4 style="padding-top: 100px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
                 <div class="row">
                     <div class="col-md-12">
@@ -93,9 +93,9 @@
                                             int max_page = i + 6;
                                             for (i = 0; i < top_movies.size() && i < max_page; i++) {
                                         Movie m = top_movies.get(i);%>
-                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                            <h4 style="text-align: center; color:#B7BDBB"><%=m.getTitle()%></h4>
                                         </div>
                                         </div>
                                         
@@ -116,9 +116,9 @@
                                             for (i = i; i < top_movies.size() && i < max_page; i++) {
                                             Movie m = top_movies.get(i);%>
 
-                                        <div class="col-md-2"><a href="#" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href="#"><%=m.getTitle()%></a>
+                                            <h4 style="text-align: center; color:#B7BDBB"><%=m.getTitle()%></h4>
                                         </div>
                                         </div>
                                         
@@ -132,6 +132,8 @@
                         </div><!--.Carousel-->
 
                     </div>
+                </div>
+                <div style="background-color:#353135; width:1320px; height:500px; position:absolute; top:100px; z-index: -1"></div>
                 </div>
             </div><!--.container-->
         </div>
