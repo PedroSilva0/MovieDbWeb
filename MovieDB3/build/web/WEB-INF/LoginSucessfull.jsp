@@ -120,7 +120,6 @@
                                                         <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                                                             <% List<Movie> top_movies = (List) request.getAttribute("top_movies");
                                                                 int pages = (int) Math.ceil(top_movies.size() / 6.0);
-                                                                System.out.println(pages);
                                                                 int i;
                                                                 for (i = 1; i < pages; i++) {%>
                                                         <li data-target="#Carousel" data-slide-to="<%=i%>"></li>
@@ -136,7 +135,8 @@
                                                                     i = 0;
                                                                     int max_page = i + 6;
                                                                     for (i = 0; i < top_movies.size() && i < max_page; i++) {
-                                                Movie m = top_movies.get(i);%>
+                                                Movie m = top_movies.get(i);
+                                                                %>
                                                                 <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
                                                                         <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>
@@ -158,7 +158,8 @@
                                                                 <%
                                                                     max_page = max_page + 6;
                                                                     for (i = i; i < top_movies.size() && i < max_page; i++) {
-                                                Movie m = top_movies.get(i);%>
+                                                Movie m = top_movies.get(i);
+                                                                %>
 
                                                                 <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
@@ -180,6 +181,144 @@
                                             </div>
                                         </div>
                                     </div><!--.container-->
+                                    <div class="container">
+                                        <% ref="Website_List?list_name=Latest_Releases&bot_limit=0&user="+u.getUsername();%>
+                <h4 style="padding-top: 50px"> <a href="<%=ref%>">Coming Soon </a> </h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="Carousel2" class="carousel slide">
+
+                            <ol class="carousel-indicators hidden">
+                                <li data-target="#Carouse2" data-slide-to="0" class="active"></li>
+                                    <% List<Movie> latest_movies = (List) request.getAttribute("latest");
+                                        pages = (int) Math.ceil(latest_movies.size() / 6.0);
+                                        for (i = 1; i < pages; i++) {%>
+                                <li data-target="#Carouse2" data-slide-to="<%=i%>"></li>
+                                    <%}%>
+                            </ol>
+
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                    <div class="row">
+                                        <%
+                                            i = 0;
+                                            max_page = i + 6;
+                                            for (i = 0; i < latest_movies.size() && i < max_page; i++) {
+                                        Movie m = latest_movies.get(i);%>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                        <%}%>
+
+                                    </div><!--.row-->
+                                </div><!--.item-->
+
+                                <%
+                                    
+                                    for (page_aux = 1; page_aux < pages; page_aux++) {
+                                %>
+
+                                <div class="item">
+                                    <div class="row">
+                                        <%
+                                            max_page = max_page + 6;
+                                            for (i = i; i < latest_movies.size() && i < max_page; i++) {
+                                            Movie m = latest_movies.get(i);%>
+
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                                <%}%>
+                                    </div><!--.row-->
+                                </div><!--.item-->
+                                <%}%>
+                            </div><!--.carousel-inner-->
+                            <%if(latest_movies.size()>6){%>
+                            <a data-slide="prev" href="#Carousel2" class="left carousel-control"><</a>
+                            <a data-slide="next" href="#Carousel2" class="right carousel-control">></a>
+                            <%}%>
+                        </div><!--.Carousel-->
+
+                    </div>
+                </div>
+            </div><!--.container-->
+                                    <div class="container">
+                                        <% ref="Website_List?list_name=Coming_Soon&bot_limit=0&user="+u.getUsername();%>
+                <h4 style="padding-top: 50px"> <a href="<%=ref%>">Coming Soon </a> </h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="Carousel3" class="carousel slide">
+
+                            <ol class="carousel-indicators hidden">
+                                <li data-target="#Carousel3" data-slide-to="0" class="active"></li>
+                                    <% List<Movie> coming_soon_movies = (List) request.getAttribute("coming_soon");
+                                        pages = (int) Math.ceil(coming_soon_movies.size() / 6.0);
+                                        for (i = 1; i < pages; i++) {%>
+                                <li data-target="#Carousel3" data-slide-to="<%=i%>"></li>
+                                    <%}%>
+                            </ol>
+
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                    <div class="row">
+                                        <%
+                                            i = 0;
+                                            max_page = i + 6;
+                                            for (i = 0; i < coming_soon_movies.size() && i < max_page; i++) {
+                                        Movie m = coming_soon_movies.get(i);%>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                        <%}%>
+
+                                    </div><!--.row-->
+                                </div><!--.item-->
+
+                                <%
+                                    
+                                    for (page_aux = 1; page_aux < pages; page_aux++) {
+                                %>
+
+                                <div class="item">
+                                    <div class="row">
+                                        <%
+                                            max_page = max_page + 6;
+                                            for (i = i; i < coming_soon_movies.size() && i < max_page; i++) {
+                                            Movie m = coming_soon_movies.get(i);%>
+
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="caption">
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                        </div>
+                                        </div>
+                                        
+                                                <%}%>
+                                    </div><!--.row-->
+                                </div><!--.item-->
+                                <%}%>
+                            </div><!--.carousel-inner-->
+                            <%if(coming_soon_movies.size()>6){%>
+                            <a data-slide="prev" href="#Carousel3" class="left carousel-control"><</a>
+                            <a data-slide="next" href="#Carousel3" class="right carousel-control">></a>
+                            <%}%>
+                        </div><!--.Carousel-->
+
+                    </div>
+                </div>
+            </div><!--.container-->
                                 </div>
                                 <div id="list-stuff" class="col-lg-12" style="display: none;">
                                     <% Map<String, List<Movie>> user_lists = (Map) request.getAttribute("lists");
@@ -187,20 +326,23 @@
 
                                     <h2 style="padding-top: 50px">You havent created any list.</h2>    
                                     <%} else {
-                                        for (String list_name : user_lists.keySet()) {%>
+                                        int carousel_number=4;
+                                        for (String list_name : user_lists.keySet()) {
+                                    String carousel_id="Carousel"+carousel_number;
+                                    String carousel_target="#Carousel"+carousel_number;%>
                                     <div class="container">
                                         <% ref="User_Lists_Servlet?list_name="+list_name.replaceAll(" ","_")+"&bot_limit=0&user="+u.getUsername();%>
                                         <h4 style="padding-top: 100px"> <a href=<%=ref%>><%=list_name%> </a> </h4>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div id="Carousel" class="carousel slide">
+                                                <div id="<%=carousel_id%>" class="carousel slide">
 
                                                     <ol class="carousel-indicators hidden">
-                                                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                                                        <li data-target="<%=carousel_target%>" data-slide-to="0" class="active"></li>
                                                             <% List<Movie> movies = user_lists.get(list_name);
                                                             pages = (int) Math.ceil(movies.size() / 6.0);
                                                             for (i = 1; i < pages; i++) {%>
-                                                        <li data-target="#Carousel" data-slide-to="<%=i%>"></li>
+                                                        <li data-target="<%=carousel_target%>" data-slide-to="<%=i%>"></li>
                                                             <%}%>
                                                     </ol>
 
@@ -248,8 +390,8 @@
                                                         <%}%>
                                                     </div><!--.carousel-inner-->
                                                     <%if(movies.size()>6){%>
-                                                    <a data-slide="prev" href="#Carousel" class="left carousel-control"><</a>
-                                                    <a data-slide="next" href="#Carousel" class="right carousel-control">></a>
+                                                    <a data-slide="prev" href="<%=carousel_target%>" class="left carousel-control"><</a>
+                                                    <a data-slide="next" href="<%=carousel_target%>" class="right carousel-control">></a>
                                                     <%}%>
                                                 </div><!--.Carousel-->
 

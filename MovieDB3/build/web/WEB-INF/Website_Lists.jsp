@@ -150,6 +150,7 @@
                                 <tbody>
                                     <% List<Movie> movies = (List) request.getAttribute("list");
                           int start_point = (int) request.getAttribute("start");
+                          int bot_limit=start_point;
                           for (Movie m : movies) {%>
                                     <tr>
                                         <td>
@@ -177,11 +178,21 @@
                         </div>
                         <div class="panel-footer" style="text-align:center">
                             <div class="row">
-                                <%if(!(start_point<20)){%>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
+                                <%if(!(start_point<=20)){%>
+                                <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+(bot_limit-20);
+                                if(request.getAttribute("user")!=null){
+                                    User u = (User) request.getAttribute("user");
+                                    ref=ref+"&user="+u.getUsername();}
+                                %>
+                                
+                                <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
                                <%}%>
                                <%if(!(movies.size()<20)){%>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                               <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+start_point;
+                               if(request.getAttribute("user")!=null){
+                                    User u = (User) request.getAttribute("user");
+                                    ref=ref+"&user="+u.getUsername();}%>
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
                                <%}%> 
                             </div>
                         </div>

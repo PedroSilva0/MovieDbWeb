@@ -4,6 +4,7 @@
     Author     : Utilizador
 --%>
 
+<%@page import="java.util.Random"%>
 <%@page import="moviedb_classes.Ratings"%>
 <%@page import="moviedb_classes.Movie"%>
 <%@page import="java.util.List"%>
@@ -108,6 +109,14 @@
                                 <div class="col col-xs-6">
                                     <h2 class="panel-title"><p><strong><%=list_name%></strong></p></h2>
                                 </div>
+                                <div class="pull-right" style="padding-right: 15px">
+                                <form method="POST" action="Remove_List_Servlet">
+                                    <input type="submit" name="delete" class="btn btn-default" value="Delete list">
+                                    <input type="hidden" name="userid" value="<%= u.getId()%>">
+                                    <input type="hidden" name="username" value="<%= u.getUsername()%>">
+                                    <input type="hidden" name="list_name" value="<%=list_name.replace(" ", "_")%>">
+                                </form>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -135,6 +144,7 @@
                                                 <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #FF6701">★</span></span></div>
                                             </div>
                                         </td>
+                                        <% Random rn= new Random();%>
                                         <% ref= "RemoveEntryServlet?user_id="+u.getId()+"&movie_id="+m.getId()+"&list_name="+list_name.replace(" ","_")+"&user="+u.getUsername()+"&bot_limit="+bot_limit;%>
                                         <td><a href=<%=ref%>>remove</a></td>
                                     </tr>
@@ -145,11 +155,14 @@
                         </div>
                         <div class="panel-footer" style="text-align:center">
                             <div class="row">
-                               <%if(bot_limit!=0){%>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
+                               <%if(bot_limit!=0){
+                               ref="User_Lists_Servlet?list_name="+list_name.replace(" ", "_")+"&bot_limit="+(bot_limit-20)+"&user="+u.getUsername();%>
+                                
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
                                <%}%>
-                               <%if(!(movies.size()<20)){%>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                               <%if(!(movies.size()<20)){
+                               ref="User_Lists_Servlet?list_name="+list_name.replace(" ", "_")+"&bot_limit="+start_point+"&user="+u.getUsername();%>
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
                                <%}%>
                             </div>
                         </div>

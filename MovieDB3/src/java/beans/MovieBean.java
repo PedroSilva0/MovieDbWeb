@@ -113,6 +113,8 @@ public class MovieBean implements MovieBeanLocal {
         if (session == null) {
             try {
                 session = MovieDB2PersistentManager.instance().getSession();
+                session.setFlushMode(FlushMode.ALWAYS);
+                session.setCacheMode(CacheMode.REFRESH);
             } catch (Exception e) {
                 e.printStackTrace();
             }

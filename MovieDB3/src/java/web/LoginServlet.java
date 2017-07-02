@@ -36,44 +36,74 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-            String user = request.getParameter("username");
-            String pwd = request.getParameter("password");
-            if(request.getParameter("log_state")!=null){
-            int log_state= Integer.parseInt(request.getParameter("log_state"));
-                if(log_state==1){
-                    User aux=MovieDB.get_user(user);
-                    request.setAttribute("user", aux);
-                    List<Movie> r= MovieDB.list_all_movies();
-                    Map<String,List<Movie>> lists= MovieDB.get_user_lists(aux);
-                    List<Ratings> ratings=MovieDB.get_user_ratings(aux);
-                    request.setAttribute("ratings",ratings);
-                    request.setAttribute("lists",lists);
-                    request.setAttribute("top_movies", r);
-                    request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
-                }
-            }else{
-            
-            
-            User u=MovieDB.login(user, pwd);
-            
-            
-            if(u!=null){
+
+        String user = request.getParameter("username");
+        System.out.println(user);
+        String pwd = request.getParameter("password");
+        if (request.getParameter("log_state") != null) {
+            System.out.println("entrei em log state");
+            int log_state = Integer.parseInt(request.getParameter("log_state"));
+            System.out.println(log_state);
+            if (log_state == 1) {
+                User u= MovieDB.get_user(user);
                 request.setAttribute("user", u);
-                List<Movie> r= MovieDB.list_all_movies();
-                Map<String,List<Movie>> lists= MovieDB.get_user_lists(u);
-                List<Ratings> ratings=MovieDB.get_user_ratings(u);
-                request.setAttribute("ratings",ratings);
-                request.setAttribute("lists",lists);
-                request.setAttribute("top_movies", r);
-                request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
-            }else{
-                request.setAttribute("log_state", -1);
-                request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
+                        List<Movie> r = MovieDB.list_all_movies();
+                        List<Movie> c = MovieDB.list_coming_soon_movies();
+                        List<Movie> l = MovieDB.latest_releases();
+                        Map<String, List<Movie>> lists = MovieDB.get_user_lists(u);
+                        List<Ratings> ratings = MovieDB.get_user_ratings(u);
+                        request.setAttribute("ratings", ratings);
+                        request.setAttribute("lists", lists);
+                        request.setAttribute("top_movies", r);
+                        request.setAttribute("coming_soon", c);
+                        request.setAttribute("latest", l);
+                        request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
             }
+        } else {
+            if (request.getAttribute("log_state") != null) {
+                int log_state = (int) request.getAttribute("log_state");
+                System.out.println(log_state);
+                if (log_state == 1) {
+                User u= MovieDB.get_user(user);
+                    request.setAttribute("user", u);
+                        List<Movie> r = MovieDB.list_all_movies();
+                        List<Movie> c = MovieDB.list_coming_soon_movies();
+                        List<Movie> l = MovieDB.latest_releases();
+                        Map<String, List<Movie>> lists = MovieDB.get_user_lists(u);
+                        List<Ratings> ratings = MovieDB.get_user_ratings(u);
+                        request.setAttribute("ratings", ratings);
+                        request.setAttribute("lists", lists);
+                        request.setAttribute("top_movies", r);
+                        request.setAttribute("coming_soon", c);
+                        request.setAttribute("latest", l);
+                        request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
+                } 
+            }else {
+
+                    User u = MovieDB.login(user, pwd);
+
+                    if (u != null) {
+                        request.setAttribute("user", u);
+                        List<Movie> r = MovieDB.list_all_movies();
+                        List<Movie> c = MovieDB.list_coming_soon_movies();
+                        List<Movie> l = MovieDB.latest_releases();
+                        Map<String, List<Movie>> lists = MovieDB.get_user_lists(u);
+                        List<Ratings> ratings = MovieDB.get_user_ratings(u);
+                        request.setAttribute("ratings", ratings);
+                        request.setAttribute("lists", lists);
+                        request.setAttribute("top_movies", r);
+                        request.setAttribute("coming_soon", c);
+                        request.setAttribute("latest", l);
+                        request.getRequestDispatcher("/WEB-INF/LoginSucessfull.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("log_state", -1);
+                        request.getRequestDispatcher("/WEB-INF/Login_Page.jsp").forward(request, response);
+                    }
+                }
+
             }
-            
-    }
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
