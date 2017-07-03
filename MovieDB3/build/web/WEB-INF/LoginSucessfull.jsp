@@ -206,9 +206,9 @@
                                             max_page = i + 6;
                                             for (i = 0; i < latest_movies.size() && i < max_page; i++) {
                                         Movie m = latest_movies.get(i);%>
-                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                            <a href=<<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -229,9 +229,9 @@
                                             for (i = i; i < latest_movies.size() && i < max_page; i++) {
                                             Movie m = latest_movies.get(i);%>
 
-                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -275,9 +275,9 @@
                                             max_page = i + 6;
                                             for (i = 0; i < coming_soon_movies.size() && i < max_page; i++) {
                                         Movie m = coming_soon_movies.get(i);%>
-                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -298,9 +298,9 @@
                                             for (i = i; i < coming_soon_movies.size() && i < max_page; i++) {
                                             Movie m = coming_soon_movies.get(i);%>
 
-                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
+                                        <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -410,7 +410,7 @@
                                                     Movie m=r.getMovie();
                                                 %>
                                                 <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                                                    <a class="fancybox thumbnail" rel="ligthbox" href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>">
+                                                    <a class="fancybox thumbnail" rel="ligthbox" href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" style="margin-top:50px">
                                                         <img class="img-responsive rated-poster" alt="" src=<%=m.getPoster()%> />
                                                     </a>
                                                     <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>

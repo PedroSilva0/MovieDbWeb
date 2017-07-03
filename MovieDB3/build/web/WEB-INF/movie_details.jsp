@@ -123,21 +123,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel">
-                            <% if (u != null) { %>
-                            <div id="0" class="panel-heading" style="background-color: #353135;">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <a href="#" class="active" id="home-link" style="color:whitesmoke">Home</a>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <a href="#" id="lists-link" style="color:whitesmoke">Lists</a>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <a href="#" id="ratings-link" style="color:whitesmoke">Ratings</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <% } %>
                             <div class="panel-body">
                                 <% Movie movie = (Movie) request.getSession().getAttribute("movie");%>
                                 <% if (u == null) {%>
@@ -189,13 +174,13 @@
                                                 <% List<Staff> actors = (List<Staff>) request.getAttribute("cast"); %>
                                                 <% for (int i = 0; i < actors.size(); i++) {%>
                                                 <% if (actors.size() == 1) {%>
-                                                <span style="margin-left:10px"> <a href="#"><%= actors.get(i).getName()%></a></span>
+                                                <span style="margin-left:10px"> <%= actors.get(i).getName()%></span>
                                                     <% } else if (i == 0) {%>
-                                                <span style="margin-left:10px"> <a href="#"><%= actors.get(i).getName() + ", "%></a></span>
+                                                <span style="margin-left:10px"> <%= actors.get(i).getName() + ", "%></span>
                                                     <% } else if (i < actors.size() - 1) {%>
-                                                <a href="#"><%= actors.get(i).getName() + ", "%></a>
+                                                <span><%= actors.get(i).getName() + ", "%></span>
                                                 <% } else {%>
-                                                <a href="#"><%= actors.get(i).getName()%></a>
+                                                <span><%= actors.get(i).getName()%></span>
                                                 <% } %>
                                                 <% } %>
                                             </div>
@@ -241,8 +226,10 @@
                                 <%}%>
                             </div>
                         </div>
-                    </div>    
-                </div>              
+                    </div> 
+                            
+                </div>
+                            
                 <!--<a id="myBTN"  href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a> -->
 
 
