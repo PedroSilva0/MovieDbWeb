@@ -51,11 +51,7 @@
                     <a class="navbar-brand" href=<%=ref%>>
                         <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                     </a>
-<<<<<<< HEAD
-                    <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
-=======
                     <a class="navbar-brand" href=<%=ref%> style="padding-top:15px">
->>>>>>> refs/remotes/origin/master
                         MovieDB
                     </a>
                 </div>
@@ -139,12 +135,7 @@
                                                                     i = 0;
                                                                     int max_page = i + 6;
                                                                     for (i = 0; i < top_movies.size() && i < max_page; i++) {
-<<<<<<< HEAD
                                                 Movie m = top_movies.get(i);%>
-=======
-                                                Movie m = top_movies.get(i);
-                                                                %>
->>>>>>> refs/remotes/origin/master
                                                                 <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
                                                                         <h4 style="text-align: center"><%=m.getTitle()%></h4>
@@ -171,11 +162,7 @@
 
                                                                 <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                                                     <div class="caption">
-<<<<<<< HEAD
-                                                                        <h4 style="text-align: center"><%=m.getTitle()%></h4>
-=======
                                                                         <a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a>
->>>>>>> refs/remotes/origin/master
                                                                     </div>
                                                                 </div>
 

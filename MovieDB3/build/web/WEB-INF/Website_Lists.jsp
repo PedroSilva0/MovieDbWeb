@@ -101,11 +101,7 @@
                         <a class="navbar-brand" href="homepage_logedout">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-<<<<<<< HEAD
-                        <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
-=======
                         <a class="navbar-brand" href="homepage_logedout" style="padding-top:15px">
->>>>>>> refs/remotes/origin/master
                             MovieDB
                         </a>
                     </div>
@@ -165,13 +161,6 @@
                                         <td>
                                             <strong style="text-align: center"><%=start_point + 1%></strong>
                                         </td>
-<<<<<<< HEAD
-                                        <% if(loggedIn) requestRoute = "/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId();
-                                           else requestRoute = "/MovieDB3/movie_details?id="+m.getId();
-                                        %>
-                                        <td><a href="<%= requestRoute%>" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
-                                        <td><h4><%=m.getTitle()%></h4></td>
-=======
                                         <%String ref="";
                                             if(request.getAttribute("user")!=null){
                                                 User u = (User) request.getAttribute("user");
@@ -182,7 +171,6 @@
                                         %>
                                         <td><a href=<%=ref%> class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
                                         <td><a href=<%=ref%>><%=m.getTitle()%></a> </td>
->>>>>>> refs/remotes/origin/master
                                         <td><div class="star-ratings-css">
                                                 <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #ff6600">★</span></span></div>
                                             </div>

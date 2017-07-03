@@ -12,6 +12,8 @@ import moviedb_classes.ListsDAO;
 import moviedb_classes.MovieDB2PersistentManager;
 import moviedb_classes.Ratings;
 import moviedb_classes.RatingsDAO;
+import org.hibernate.CacheMode;
+import org.hibernate.FlushMode;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 

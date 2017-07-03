@@ -44,11 +44,7 @@
                         <a class="navbar-brand" href="homepage_logedout">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-<<<<<<< HEAD
-                        <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
-=======
                         <a class="navbar-brand" href="homepage_logedout" style="padding-top:15px">
->>>>>>> refs/remotes/origin/master
                             MovieDB
                         </a>
                     </div>
@@ -73,14 +69,8 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-<<<<<<< HEAD
             <div class="container" style="position:relative; z-index: 2">
                 <h4 style="padding-top: 100px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
-=======
-            <div class="container">
-
-                <h4 style="padding-top: 50px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
->>>>>>> refs/remotes/origin/master
                 <div class="row">
                     <div class="col-md-12">
                         <div id="Carousel" class="carousel slide">
@@ -104,15 +94,10 @@
                                             i = 0;
                                             int max_page = i + 6;
                                             for (i = 0; i < top_movies.size() && i < max_page; i++) {
-<<<<<<< HEAD
-                                        Movie m = top_movies.get(i);%>
-                                        <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
-=======
                                         Movie m = top_movies.get(i);
                                         %>
                                         
                                         <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
->>>>>>> refs/remotes/origin/master
                                         <div class="caption">
                                             <h4 style="text-align: center"><%=m.getTitle()%></h4>
                                         </div>
@@ -136,15 +121,9 @@
                                             Movie m = top_movies.get(i);
                                         %>
 
-<<<<<<< HEAD
-                                        <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
-                                        <div class="caption">
-                                            <h4 style="text-align: center"><%=m.getTitle()%></h4>
-=======
                                         <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
                                             <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
->>>>>>> refs/remotes/origin/master
                                         </div>
                                         </div>
                                         
