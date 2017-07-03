@@ -163,7 +163,7 @@
                                         </td>
                                         <%String ref="";
                                             if(request.getAttribute("user")!=null){
-                                                User u = (User) request.getAttribute("user");
+                                                u = (User) request.getAttribute("user");
                                                 ref="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId();
                                             }else{
                                                 ref="/MovieDB3/movie_details?id="+m.getId();
@@ -186,7 +186,7 @@
                                 <%if(!(start_point<=20)){%>
                                 <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+(bot_limit-20);
                                 if(request.getAttribute("user")!=null){
-                                    User u = (User) request.getAttribute("user");
+                                    u = (User) request.getAttribute("user");
                                     ref=ref+"&user="+u.getUsername();}
                                 %>
                                 
@@ -195,7 +195,7 @@
                                <%if(!(movies.size()<20)){%>
                                <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+start_point;
                                if(request.getAttribute("user")!=null){
-                                    User u = (User) request.getAttribute("user");
+                                    u = (User) request.getAttribute("user");
                                     ref=ref+"&user="+u.getUsername();}%>
                                <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
                                <%}%> 

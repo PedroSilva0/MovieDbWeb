@@ -99,7 +99,7 @@
                                         
                                         <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <h4 style="text-align: center"><%=m.getTitle()%></h4>
+                                            <a href=<%="/MovieDB3/movie_details?id="+m.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         
@@ -279,10 +279,9 @@
                     </div>
                 </div>
             </div><!--.container-->
-        </div>
-                            
-        <div style="background-color:#353135; width:100%; height:350px; position:relative; top:200px; z-index: 10"></div>
-
+            <a id="back-to-top"  href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        </div>  
+        
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

@@ -43,7 +43,7 @@
             <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="homepage_logedout">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
                         <a class="navbar-brand" href="/MovieDB3/homepage_logedout" style="padding-top:15px;margin-left:10px;color:whitesmoke">
@@ -55,11 +55,15 @@
                             <input type="submit" name="login" class="btn btn-default" value="Login">
                             <input type="submit" name="register" class="btn btn-default" value="Register">
                         </form>
-                        <form class="navbar-form" id="search">
+                        <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
                             <div class="form-group" style="display:inline;">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Search movie title">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
                                 </div>
                             </div>
                         </form>
@@ -72,10 +76,11 @@
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <% String ref="LoginServlet?log_state=1&username="+u.getUsername();%>
+                        <a class="navbar-brand" href="<%=ref%>">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-                        <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
+                            <a class="navbar-brand" href="<%=ref%>" style="padding-top:15px;margin-left:10px;color:whitesmoke">
                             MovieDB
                         </a>
                     </div>
@@ -96,11 +101,16 @@
                         </ul>
                         </li>
                         </ul>
-                        <form class="navbar-form" id="search">
+                        <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
                             <div class="form-group" style="display:inline;">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Search movie title">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <input type="hidden" name="user" value="<%=u.getId()%>" />
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
                                 </div>
                             </div>
                         </form>
@@ -301,6 +311,7 @@
                 </div>
                 <% }%>
             </div>
+            <a id="back-to-top"  href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
         </div>
 
         <!-- Bootstrap core JavaScript
