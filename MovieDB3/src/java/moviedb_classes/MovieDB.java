@@ -250,7 +250,11 @@ public class MovieDB {
     }
 
     public static User get_user(String username) {
+        System.out.println("tentei ir buscar user");
         User u = userBean.get_user_by_username(username);
+        if(u==null){
+            System.out.println("nao encontrou o user");
+        }
         return u;
     }
 

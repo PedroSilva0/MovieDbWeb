@@ -30,6 +30,8 @@ public class UserBean implements UserBeanLocal {
         PersistentSession session_aux=this.getSession();
         User r= null;
         try {
+            System.out.println("tentei ir buscar no bean");
+            System.out.println(username);
             r = UserDAO.loadUserByQuery(session_aux,"username='"+username+"'", "username");
             
         } catch (Exception e) {

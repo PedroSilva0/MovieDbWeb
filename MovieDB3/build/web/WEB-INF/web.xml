@@ -6,6 +6,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Index</welcome-file>
+        <welcome-file>homepage_logedout</welcome-file>
     </welcome-file-list>
 </web-app>

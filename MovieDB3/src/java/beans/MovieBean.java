@@ -89,7 +89,7 @@ public class MovieBean implements MovieBeanLocal {
         } catch (Exception e) {
             System.out.println("didnt get any movies");
         }
-        if(r!=null){
+        if(r.size()!=0){
             return r.get(0);
         }
         return null;
