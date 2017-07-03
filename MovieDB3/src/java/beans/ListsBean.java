@@ -14,6 +14,7 @@ import moviedb_classes.ListsDAO;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDAO;
 import moviedb_classes.MovieDB2PersistentManager;
+import moviedb_classes.UserDAO;
 import org.hibernate.CacheMode;
 import org.hibernate.FlushMode;
 import org.orm.PersistentException;
@@ -110,6 +111,24 @@ public class ListsBean implements ListsBeanLocal {
              System.out.println("delete falhou");
          }
     }
+
+    @Override
+    public void add_to_list(Lists l) {
+        PersistentSession session_aux=this.getSession();
+       try {
+           ListsDAO.save(l);
+           //session.clear();
+       } catch (PersistentException ex) {
+           System.out.println("Não registou");
+       }
+    }
+    
+    
+
+    
+    
+    
+    
     
     
     

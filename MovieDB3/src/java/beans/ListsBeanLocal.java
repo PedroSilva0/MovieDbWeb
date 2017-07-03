@@ -23,5 +23,7 @@ public interface ListsBeanLocal {
     public void remove_from_list(int user_id, int movie_id, String list_type);
 
     public void remove_list(String id, String list_name);
+
+    public void add_to_list(Lists l);
     
 }

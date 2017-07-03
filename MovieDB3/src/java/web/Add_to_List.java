@@ -7,6 +7,8 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,14 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDB;
+import moviedb_classes.Ratings;
 import moviedb_classes.User;
 
 /**
  *
- * @author adt
+ * @author Utilizador
  */
-@WebServlet(name = "ratings_servlet", urlPatterns = {"/ratings_servlet"})
-public class ratings_servlet extends HttpServlet {
+@WebServlet(name = "Add_to_List", urlPatterns = {"/Add_to_List"})
+public class Add_to_List extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +37,12 @@ public class ratings_servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("entrei no ratings servlet");
-        User user = (User)request.getSession().getAttribute("user");
-        Movie movie = (Movie)request.getSession().getAttribute("movie");
-        String rating = request.getParameter("rating");
-        MovieDB.saveRating(user,movie,Integer.parseInt(rating));
+        
+        String user_id = request.getParameter("user_id");
+        String movie_id=request.getParameter("movie_id");
+        String list_name=request.getParameter("list_name").replace("_"," ");
+        MovieDB.add_to_list(user_id,movie_id,list_name);
+        request.getRequestDispatcher("movie_details?user="+user_id+"&id="+movie_id).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -317,6 +317,14 @@
                         pos = self.events._getTouchPosition(ev);
                         self._setStars(pos);
                         params = [self.$element.val(), self._getCaption()];
+                        var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.onreadystatechange = function () {
+                        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                            callback(xmlHttp.responseText);
+                        }
+                        xmlHttp.open("GET", "/MovieDB3/ratings_servlet?rating=" + params[0], true); // true for asynchronous 
+                        xmlHttp.send(null);
+                        console.log("chamoume yay");
                         self.$element.trigger('change').trigger('rating.change', params);
                         self.starClicked = true;
                     });

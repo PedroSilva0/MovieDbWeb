@@ -50,6 +50,8 @@ public class movie_details extends HttpServlet {
         request.setAttribute("cast",actors);
         List<String> l = new ArrayList<>();
         for(Staff s : actors) l.add(s.getName()+" ");
+        List<String> user_lists=MovieDB.get_user_lists_names(userId);
+        request.setAttribute("user_lists",user_lists);
         
         request.getRequestDispatcher("/WEB-INF/movie_details.jsp").forward(request, response);
     }

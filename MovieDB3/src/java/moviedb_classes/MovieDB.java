@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -390,6 +391,30 @@ public class MovieDB {
     public static void delete_list(String id, String list_name) {
         System.out.println("cheguei a moviedb");
        listsBean.remove_list(id,list_name);
+    }
+
+    public static void add_to_list(String user_id, String movie_id, String list_name) {
+        Lists l= new Lists();
+        User u= userBean.getUserById(user_id);
+        Movie m= movieBean.getMovieByORMID(movie_id);
+        l.setList_name(list_name);
+        l.setMovie(m);
+        l.setUser(u);
+        listsBean.add_to_list(l);
+    }
+
+    public static List<String> get_user_lists_names(String userId) {
+        List<Lists> user_lists_data = listsBean.get_user_lists(Integer.parseInt(userId));
+        TreeSet<String> user_lists = new TreeSet<>();
+        if (user_lists_data != null) {
+            for (Lists l : user_lists_data) {
+                user_lists.add(l.getList_name());
+            }
+        }
+        if(user_lists.size()>0){
+            return new ArrayList<String>(user_lists);
+        }
+        return new ArrayList<String>();
     }
 
 }
