@@ -6,8 +6,7 @@
 package web;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDB;
-import moviedb_classes.Staff;
 import moviedb_classes.User;
 
 /**
  *
  * @author adt
  */
-@WebServlet(name = "movie_details", urlPatterns = {"/movie_details"})
-public class movie_details extends HttpServlet {
+@WebServlet(name = "ratings_servlet", urlPatterns = {"/ratings_servlet"})
+public class ratings_servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +35,10 @@ public class movie_details extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String id = request.getParameter("id");
-        Movie m = MovieDB.getMovieById(id);
-        request.getSession().setAttribute("movie",m);
-        
-        String userId = request.getParameter("user");
-        User u = null;
-        if(userId != null) u = MovieDB.getUserById(userId);
-        request.getSession().setAttribute("user",u);
-        
-        List<Staff> actors = MovieDB.getMovieCast(id);
-        request.setAttribute("cast",actors);
-        List<String> l = new ArrayList<>();
-        for(Staff s : actors) l.add(s.getName()+" ");
-        
-        request.getRequestDispatcher("/WEB-INF/movie_details.jsp").forward(request, response);
+        User user = (User)request.getSession().getAttribute("user");
+        Movie movie = (Movie)request.getSession().getAttribute("movie");
+        String rating = request.getParameter("rating");
+        MovieDB.saveRating(user,movie,Integer.parseInt(rating));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

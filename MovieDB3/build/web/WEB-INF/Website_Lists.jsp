@@ -49,7 +49,7 @@
             u = (User) request.getAttribute("user");
             loggedIn = true;
         %>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -89,13 +89,13 @@
             </div><!-- /.container-fluid -->
         </nav>
                             <%}else{%>
-                            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                            <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
                 <div class="container">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-                        <a class="navbar-brand" href="#" style="padding-top:15px">
+                        <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
                             MovieDB
                         </a>
                     </div>
@@ -125,15 +125,15 @@
                 <div class="col-md-10 col-md-offset-1">
 
                     <div class="panel panel-default panel-table">
-                        <div class="panel-heading">
-                            <div class="row">
+                        <div class="panel-heading" style="background-color:#353135">
+                            <div class="row" style="background-color:#353135">
                                 <div class="col col-xs-6">
-                                    <h2 class="panel-title"><p><strong><%=list_name%></strong></p></h2>
+                                    <h2 class="panel-title"><p><strong style="color:whitesmoke"><%=list_name%></strong></p></h2>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list">
+                            <table class="table table-bordered table-list">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -154,9 +154,9 @@
                                            else requestRoute = "/MovieDB3/movie_details?id="+m.getId();
                                         %>
                                         <td><a href="<%= requestRoute%>" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
-                                        <td><h6><%=m.getTitle()%></h6></td>
+                                        <td><h4><%=m.getTitle()%></h4></td>
                                         <td><div class="star-ratings-css">
-                                                <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #FF6701">★</span></span></div>
+                                                <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #ff6600">★</span></span></div>
                                             </div>
                                         </td>
                                     </tr>

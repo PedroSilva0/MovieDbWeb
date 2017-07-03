@@ -12,6 +12,7 @@ import moviedb_classes.ListsDAO;
 import moviedb_classes.MovieDB2PersistentManager;
 import moviedb_classes.Ratings;
 import moviedb_classes.RatingsDAO;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 
 /**
@@ -44,5 +45,13 @@ public class RatingsBean implements RatingsBeanLocal {
             }
         }
         return session;
+    }
+    
+    public void saveRating(Ratings rating) {
+        try {
+           RatingsDAO.save(rating);
+       } catch (PersistentException ex) {
+           System.out.println("Não registou");
+       }
     }
 }

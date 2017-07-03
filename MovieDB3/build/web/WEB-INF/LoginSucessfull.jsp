@@ -43,14 +43,14 @@
     <body>
 
         <% User u = (User) request.getAttribute("user");%>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
                         <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                     </a>
-                    <a class="navbar-brand" href="#" style="padding-top:15px">
+                    <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
                         MovieDB
                     </a>
                 </div>
@@ -87,16 +87,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel">
-                        <div id="0" class="panel-heading">
+                        <div id="0" class="panel-heading" style="background-color: #353135;">
                             <div class="row">
-                                <div class="col-xs-4">
-                                    <a href="#" class="active" id="home-link">Home</a>
+                                <div class="col-xs-6">
+                                    <a href="#" class="active" id="home-link" style="color:whitesmoke">Home</a>
                                 </div>
-                                <div class="col-xs-4">
-                                    <a href="#" id="lists-link">Lists</a>
+                                <div class="col-xs-5">
+                                    <a href="#" id="lists-link" style="color:whitesmoke">Lists</a>
                                 </div>
-                                <div class="col-xs-4">
-                                    <a href="#" id="ratings-link">Ratings</a>
+                                <div class="col-xs-1">
+                                    <a href="#" id="ratings-link" style="color:whitesmoke">Ratings</a>
                                 </div>
                             </div>
                         </div>

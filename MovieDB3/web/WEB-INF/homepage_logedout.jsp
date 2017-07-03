@@ -38,13 +38,13 @@
     </head>
     <body>
         <div>
-            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
                 <div class="container">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
-                        <a class="navbar-brand" href="#" style="padding-top:15px">
+                        <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
                             MovieDB
                         </a>
                     </div>
@@ -65,8 +65,7 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-            <div class="container">
-                <div style="position:relative">
+            <div class="container" style="position:relative; z-index: 2">
                 <h4 style="padding-top: 100px"> <a href="Website_List?list_name=Top_Rated&bot_limit=0">Top Rated </a> </h4>
                 <div class="row">
                     <div class="col-md-12">
@@ -95,7 +94,7 @@
                                         Movie m = top_movies.get(i);%>
                                         <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <h4 style="text-align: center; color:#B7BDBB"><%=m.getTitle()%></h4>
+                                            <h4 style="text-align: center"><%=m.getTitle()%></h4>
                                         </div>
                                         </div>
                                         
@@ -118,7 +117,7 @@
 
                                         <div class="col-md-2"><a href="<%="/MovieDB3/movie_details?id="+m.getId()%>" class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style="height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <h4 style="text-align: center; color:#B7BDBB"><%=m.getTitle()%></h4>
+                                            <h4 style="text-align: center"><%=m.getTitle()%></h4>
                                         </div>
                                         </div>
                                         
@@ -133,10 +132,10 @@
 
                     </div>
                 </div>
-                <div style="background-color:#353135; width:1320px; height:500px; position:absolute; top:100px; z-index: -1"></div>
-                </div>
             </div><!--.container-->
         </div>
+                            
+        <div style="background-color:#353135; width:100%; height:350px; position:relative; top:200px; z-index: 10"></div>
 
         <!-- Bootstrap core JavaScript
     ================================================== -->

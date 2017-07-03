@@ -18,4 +18,6 @@ public interface RatingsBeanLocal {
 
     public List<Ratings> get_all_ratings_of_user(int userId);
     
+    public void saveRating(Ratings rating);
+    
 }

@@ -278,7 +278,15 @@ public class MovieDB {
         for(Movie_Staff ms : records)
             actors.add(ms.getStaff());
         return actors;
-    } 
+    }
+    
+    public static void saveRating(User user, Movie movie, int rating) {
+        Ratings stars = new Ratings();
+        stars.setUser(user);
+        stars.setMovie(movie);
+        stars.setRating(rating);
+        ratingsBean.saveRating(stars);
+    }
 
     private static MovieStaffBeanLocal lookupMovieStaffBeanLocal() {
         try {
