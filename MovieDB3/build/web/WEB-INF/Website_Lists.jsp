@@ -53,10 +53,11 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                     <% String ref="LoginServlet?log_state=1&username="+u.getUsername();%>
+                     <a class="navbar-brand" href=<%=ref%>>
                         <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                     </a>
-                    <a class="navbar-brand" href="#" style="padding-top:15px">
+                    <a class="navbar-brand" href=<%=ref%> style="padding-top:15px">
                         MovieDB
                     </a>
                 </div>
@@ -69,7 +70,7 @@
                         </li>
                         <li><p class="navbar-text">Hello,</p></li>
                         <li class="dropdown ">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=u.getUsername()%></b> <span class="caret"></span></a>
+                            <a href="homepage_logeout" class="dropdown-toggle" data-toggle="dropdown"><b><%=u.getUsername()%></b> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
                                 <li><a href="homepage_logedout">Log out</a></li>
@@ -77,14 +78,19 @@
                     </ul>
                     </li>
                     </ul>
-                    <form class="navbar-form" id="search">
-                        <div class="form-group" style="display:inline;">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search movie title">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <input type="hidden" name="user" value="<%=u.getId()%>" />
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
@@ -92,10 +98,14 @@
                             <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#353135">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="homepage_logedout">
                             <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                         </a>
+<<<<<<< HEAD
                         <a class="navbar-brand" href="#" style="padding-top:15px;margin-left:10px;color:whitesmoke">
+=======
+                        <a class="navbar-brand" href="homepage_logedout" style="padding-top:15px">
+>>>>>>> refs/remotes/origin/master
                             MovieDB
                         </a>
                     </div>
@@ -104,11 +114,15 @@
                             <input type="submit" name="login" class="btn btn-default" value="Login">
                             <input type="submit" name="register" class="btn btn-default" value="Register">
                         </form>
-                        <form class="navbar-form" id="search">
+                        <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
                             <div class="form-group" style="display:inline;">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Search movie title">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
                                 </div>
                             </div>
                         </form>
@@ -145,16 +159,30 @@
                                 <tbody>
                                     <% List<Movie> movies = (List) request.getAttribute("list");
                           int start_point = (int) request.getAttribute("start");
+                          int bot_limit=start_point;
                           for (Movie m : movies) {%>
                                     <tr>
                                         <td>
                                             <strong style="text-align: center"><%=start_point + 1%></strong>
                                         </td>
+<<<<<<< HEAD
                                         <% if(loggedIn) requestRoute = "/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId();
                                            else requestRoute = "/MovieDB3/movie_details?id="+m.getId();
                                         %>
                                         <td><a href="<%= requestRoute%>" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
                                         <td><h4><%=m.getTitle()%></h4></td>
+=======
+                                        <%String ref="";
+                                            if(request.getAttribute("user")!=null){
+                                                User u = (User) request.getAttribute("user");
+                                                ref="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId();
+                                            }else{
+                                                ref="/MovieDB3/movie_details?id="+m.getId();
+                                            }
+                                        %>
+                                        <td><a href=<%=ref%> class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
+                                        <td><a href=<%=ref%>><%=m.getTitle()%></a> </td>
+>>>>>>> refs/remotes/origin/master
                                         <td><div class="star-ratings-css">
                                                 <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #ff6600">★</span></span></div>
                                             </div>
@@ -167,8 +195,22 @@
                         </div>
                         <div class="panel-footer" style="text-align:center">
                             <div class="row">
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                                <%if(!(start_point<=20)){%>
+                                <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+(bot_limit-20);
+                                if(request.getAttribute("user")!=null){
+                                    User u = (User) request.getAttribute("user");
+                                    ref=ref+"&user="+u.getUsername();}
+                                %>
+                                
+                                <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
+                               <%}%>
+                               <%if(!(movies.size()<20)){%>
+                               <%String ref="Website_List?list_name="+list_name.replace(" ", "_")+"&bot_limit="+start_point;
+                               if(request.getAttribute("user")!=null){
+                                    User u = (User) request.getAttribute("user");
+                                    ref=ref+"&user="+u.getUsername();}%>
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                               <%}%> 
                             </div>
                         </div>
                     </div>

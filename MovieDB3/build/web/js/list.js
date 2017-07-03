@@ -11,4 +11,8 @@ $(document).ready(function() {
     pause: true,
     interval: false,
   });
+  $('#Carousel2').carousel({
+    pause: true,
+    interval: false,
+  });
 });

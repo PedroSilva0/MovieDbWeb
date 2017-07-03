@@ -12,7 +12,28 @@ VALUES
 (7,107,24,11,2016,7.7,'Moana','images/posters/moana.jpg','Animation','In Ancient Polynesia, when a terrible curse incurred by the Demigod Maui reaches an impetuous Chieftain\'s daughter\'s island, she answers the Ocean\'s call to seek out the Demigod to set things right.',642666887),
 (8,133,17,11,2016,7.4,'Fantastic Beasts and Where to Find Them','images/posters/fantastic_beasts.jpg','Adventure','The adventures of writer Newt Scamander in New York\'s secret community of witches and wizards seventy years before Harry Potter reads his book in school.',814037575),
 (9,116,10,11,2016,8.0,'Arrival','images/posters/arrival.jpg','Sci-Fi','When twelve mysterious spacecraft appear around the world, linguistics professor Louise Banks is tasked with interpreting the language of the apparent alien visitors.',202107388),
-(10,127,2,2,2017,7.8,'Hidden Figures','images/posters/hidden_figures.jpg','Historical','The story of a team of female African-American mathematicians who served a vital role in NASA during the early years of the U.S. space program.',230106697);
+(10,127,2,2,2017,7.8,'Hidden Figures','images/posters/hidden_figures.jpg','Historical','The story of a team of female African-American mathematicians who served a vital role in NASA during the early years of the U.S. space program.',230106697),
+(11,144,14,7,2017,0,'War for the Planet of the Apes','images/posters/planet_of_the_apes.jpg','Sci-Fi','After the apes suffer unimaginable losses, Caesar wrestles with his darker instincts and begins his own mythic quest to avenge his kind.',0),
+(12,107,20,7,2017,0,'Dunkirk','images/posters/dunkirk.jpg','Historical','Allied soldiers from Belgium, the British Empire, Canada, and France are surrounded by the German army and evacuated during a fierce battle in World War II.',0),
+(13,137,27,7,2017,0,'Valerian and the City of a Thousand Planets','images/posters/valerian.jpg','Sci-Fi','A dark force threatens Alpha, a vast metropolis and home to species from a thousand planets. Special operatives Valerian and Laureline must race to identify the marauding menace and safeguard not just Alpha, but the future of the universe.',0),
+(14,120,24,8,2017,0,'The Dark Tower','images/posters/dark_tower.jpg','Adventure','The Gunslinger, Roland Deschain, roams an Old West-like landscape where "the world has moved on" in pursuit of the man in black. Also searching for the fabled Dark Tower, in the hopes that reaching it will preserve his dying world.',0),
+(15,100,10,10,2017,0,'The Emoji Movie','images/posters/emoji.jpg','Animation','Gene, a multi-expressional emoji, sets out on a journey to become a normal emoji.',0),
+(16,75,18,8,2017,0,'The Hitman\'s Bodyguard','images/posters/hitman.jpg','Action','The world\'s top bodyguard gets a new client, a hit man who must testify at the International Court of Justice. They must put their differences aside and work together to make it to the trial on time.',0),
+(17,125,24,2,2015,8.0,'Mar adentro','images/posters/mar.jpg','Drama','The factual story of Spaniard Ramon Sampedro, who fought a thirty-year campaign in favor of euthanasia and his own right to die.',230106697),
+(18,94,1,1,1996,8.2,'Trainspotting','images/posters/train.jpg','Drama','Renton, deeply immersed in the Edinburgh drug scene, tries to clean up and get out, despite the allure of the drugs and influence of friends.',230106697),
+(19,116,25,1,2002,7.6,'The Man Who Wasn\'t There','images/posters/barber.jpg','Crime','A laconic, chain-smoking barber blackmails his wife\'s boss and lover for money to invest in dry cleaning, but his plan goes terribly wrong.',230106697),
+(20,154,25,11,1994,8.9,'Pulp Fiction','images/posters/pulp.jpg','Drama','The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',230106697),
+(21,122,28,2,2008,8.1,'No Country for Old Men','images/posters/old.jpg','Crime','Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande.',230106697),
+(22,113,29,6,2001,8.5,'Memento','images/posters/memento.jpg','Mistery','A man juggles searching for his wife\'s murderer and keeping his short-term memory loss from being an obstacle.',230106697),
+(23,137,23,3,2006,8.5,'Das Leben der Anderen','images/posters/das.jpg','Drama','In 1984 East Berlin, an agent of the secret police, conducting surveillance on a writer and his lover, finds himself becoming increasingly absorbed by their lives.',230106697),
+(24,148,31,1,2008,8.1,'Into the Wild','images/posters/wild.jpg','Adventure','After graduating from Emory University, top student and athlete Christopherbabandons his possessions, gives his entire $24,000 savings account to charity and hitchhikes to Alaska to live in the wilderness. Along the way, Christopher encounters a series of characters that shape his life.',230106697),
+(25,128,26,8,2010,7.1,'No Smoking','images/posters/smoking.jpg','Mistery','A surreal story about a man, his addiction of smoking, and a mysterious and powerful organisation, which claims to cure such addictions, though through very unusual ways.',230106697),
+(26,136,25,6,1999,8.7,'Matrix','images/posters/matrix.jpg','Sci-Fi','A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',230106697),
+(27,84,10,7,1998,7.5,'Pi','images/posters/pi.jpg','Horror','A paranoid mathematician searches for a key number that will unlock the universal patterns found in nature.',230106697),
+(28,139,12,11,1999,8.8,'Fight Club','images/posters/club.jpg','Drama','An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more.',230106697),
+(29,125,28,2,2003,8.6,'Spirited Away','images/posters/spirited.jpg','Animation','During her family\'s move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.',230106697),
+(30,123,15,2,2007,7.7,'The Last King of Scotland','images/posters/king.jpg','Historical','Based on the events of the brutal Ugandan dictator Idi Amin\'s regime as seen by his personal physician during the 1970\'s.',230106697);
+
 
 
 
@@ -33,7 +54,7 @@ VALUES
 INSERT INTO `moviedb`.`user`
 (`Id`,`Username`,`Password`,`Avatar`,`Email`)
 VALUES
-(1,'user1','pass1','images/avatar/default.jpg','mail@mail.com'),
+(1,'user1','pass1','images/avatars/default.jpg','mail@mail.com'),
 (2,'user2','pass2','images/avatars/user2_avatar.png','mail2@mail.com');
 
 INSERT INTO `moviedb`.`review`

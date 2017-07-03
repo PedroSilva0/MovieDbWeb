@@ -13,6 +13,9 @@
  */
 package moviedb_classes;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Movie {
 	public Movie() {
 	}
@@ -206,5 +209,14 @@ public class Movie {
 	public String toString() {
 		return String.valueOf(getId());
 	}
+
+    public Date getDate() {
+        Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, this.getRelease_year());
+            calendar.set(Calendar.MONTH, this.getRelease_month() - 1);
+            calendar.set(Calendar.DATE, this.getRelease_day());
+            Date movie_date = calendar.getTime();
+            return movie_date;
+    }
 	
 }

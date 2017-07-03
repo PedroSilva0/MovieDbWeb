@@ -24,4 +24,8 @@ public interface MovieBeanLocal {
     public List<Movie> list_movies_by_year();
     
     public Movie getMovieByORMID(String id);
+
+    public Movie getMovie(String movie_name);
+
+    public void clear();
 }

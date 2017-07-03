@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 import moviedb_classes.MovieDB2PersistentManager;
 import moviedb_classes.User;
 import moviedb_classes.UserDAO;
+import org.hibernate.CacheMode;
+import org.hibernate.FlushMode;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 
@@ -28,6 +30,8 @@ public class UserBean implements UserBeanLocal {
         PersistentSession session_aux=this.getSession();
         User r= null;
         try {
+            System.out.println("tentei ir buscar no bean");
+            System.out.println(username);
             r = UserDAO.loadUserByQuery(session_aux,"username='"+username+"'", "username");
             
         } catch (Exception e) {
@@ -41,6 +45,7 @@ public class UserBean implements UserBeanLocal {
         PersistentSession session_aux=this.getSession();
        try {
            UserDAO.save(u);
+           //session.clear();
        } catch (PersistentException ex) {
            System.out.println("Não registou");
        }
@@ -52,6 +57,8 @@ public class UserBean implements UserBeanLocal {
         if (session == null) {
             try {
                 session = MovieDB2PersistentManager.instance().getSession();
+                session.setFlushMode(FlushMode.ALWAYS);
+                session.setCacheMode(CacheMode.REFRESH);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -69,4 +76,12 @@ public class UserBean implements UserBeanLocal {
        }
        return u;
    }
+
+    @Override
+    public void clear() {
+        session.clear();
+    }
+    
+    
+    
 }

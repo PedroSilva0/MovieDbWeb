@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import moviedb_classes.Movie;
 import moviedb_classes.MovieDAO;
 import moviedb_classes.MovieDB2PersistentManager;
+import org.hibernate.CacheMode;
+import org.hibernate.FlushMode;
 import org.orm.PersistentSession;
 
 /**
@@ -76,6 +78,31 @@ public class MovieBean implements MovieBeanLocal {
         }
         return movie;
     }
+
+    @Override
+    public Movie getMovie(String movie_name) {
+        PersistentSession session_aux=this.getSession();
+        List<Movie> r = null;
+        try {
+            r = MovieDAO.queryMovie(session_aux,"title='"+movie_name+"'", "id");
+            
+        } catch (Exception e) {
+            System.out.println("didnt get any movies");
+        }
+        if(r.size()!=0){
+            return r.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public void clear() {
+        session.clear();
+    }
+    
+    
+    
+
     
   
     
@@ -86,6 +113,8 @@ public class MovieBean implements MovieBeanLocal {
         if (session == null) {
             try {
                 session = MovieDB2PersistentManager.instance().getSession();
+                session.setFlushMode(FlushMode.ALWAYS);
+                session.setCacheMode(CacheMode.REFRESH);
             } catch (Exception e) {
                 e.printStackTrace();
             }

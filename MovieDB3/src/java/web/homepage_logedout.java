@@ -41,11 +41,15 @@ public class homepage_logedout extends HttpServlet {
         //r= MovieDB.list_all_movies();
         //request.setAttribute("movies", r);
         List<Movie> r = new ArrayList<Movie>();
-        
+        List<Movie> c = new ArrayList<Movie>();
+        List<Movie> l = new ArrayList<Movie>();
         //System.out.println("entrei");
         r= MovieDB.list_top_rated_movies();
+        c=MovieDB.list_coming_soon_movies();
+        l=MovieDB.latest_releases();
         
-        
+        request.setAttribute("latest",l);
+        request.setAttribute("coming_soon",c);
         request.setAttribute("top_movies", r);
         request.getRequestDispatcher("/WEB-INF/homepage_logedout.jsp").forward(request, response);
     }

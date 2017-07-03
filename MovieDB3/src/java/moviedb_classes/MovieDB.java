@@ -27,6 +27,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.orm.PersistentException;
+
 /**
  *
  * @author Utilizador
@@ -48,28 +49,35 @@ public class MovieDB {
     public static List<Movie> list_all_movies(){
         return movieBean.list_all_movies();
     }
-    
-    public static List<Movie> list_top_rated_movies(){
-        List<Movie> res= movieBean.list_top_rated_movies();
+
+    public static List<Movie> list_top_rated_movies() {
+        List<Movie> res = movieBean.list_top_rated_movies();
         Collections.reverse(res);
-        if(res.size()>54){
-            res=res.subList(0, 54);
+        List<Movie> final_res=new ArrayList<>();
+        for(Movie m:res){
+            if(m.getRating()==0){
+                break;
+            }
+            final_res.add(m);
+            if(final_res.size()==54){
+                break;
+            }
         }
-        return res;
+        return final_res;
     }
-    
-    public static Movie getMovieById(String id){
+
+    public static Movie getMovieById(String id) {
         return movieBean.getMovieByORMID(id);
     }
-    
-    public static User getUserById(String id){
+
+    public static User getUserById(String id) {
         return userBean.getUserById(id);
     }
-    
-    public static List<Movie> list_coming_soon_movies(){
+
+    public static List<Movie> list_coming_soon_movies() {
         List<Movie> aux = movieBean.list_movies_by_year();
         List<Movie> res = new ArrayList<>();
-        Date today=new Date();
+        Date today = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(today);
         int year = cal.get(Calendar.YEAR);
@@ -77,61 +85,61 @@ public class MovieDB {
         for (Movie m : aux) {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, m.getRelease_year());
-            if(year< m.getRelease_year()){
+            if (year < m.getRelease_year()) {
                 break;
             }
             calendar.set(Calendar.MONTH, m.getRelease_month() - 1);
-            calendar.set(Calendar.DATE, m.getRelease_day() );
+            calendar.set(Calendar.DATE, m.getRelease_day());
             Date movie_date = calendar.getTime();
-            if(movie_date.after(today)){
+            if (movie_date.after(today)) {
                 res.add(m);
             }
-            if(res.size()==5){
+            if (res.size() == 54) {
                 break;
             }
         }
         return res;
     }
     
-    public static List<Movie> list_in_cinema_movies(){
+    public static List<Movie> latest_releases(){
         List<Movie> aux = movieBean.list_movies_by_year();
         List<Movie> res = new ArrayList<>();
-        Date today=new Date();
-        Date two_weeks_ago;
+        Date today = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(today);
-        cal.add(Calendar.DAY_OF_MONTH, -14);
-        two_weeks_ago=cal.getTime();
-        int year = cal.get(Calendar.YEAR);
         Collections.reverse(aux);
         for (Movie m : aux) {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, m.getRelease_year());
-            if(year< m.getRelease_year()){
-                break;
-            }
             calendar.set(Calendar.MONTH, m.getRelease_month() - 1);
-            calendar.set(Calendar.DATE, m.getRelease_day() );
+            calendar.set(Calendar.DATE, m.getRelease_day());
             Date movie_date = calendar.getTime();
-            if(movie_date.before(today)&&movie_date.after(two_weeks_ago)){
+            if (movie_date.before(today)) {
                 res.add(m);
             }
-            if(res.size()==5){
+            if (res.size() == 54) {
                 break;
             }
         }
+        
+        Collections.sort(res, new Comparator<Movie>() {
+            public int compare(Movie one, Movie other) {
+                return other.getDate().compareTo(one.getDate());
+            }
+        });
         return res;
-    
     }
-    
-    public static User login(String user,String pass){
-        User u= userBean.get_user_by_username(user);
-        if(u!=null){
-            if(u.getPassword().equals(pass)){
+
+   
+
+    public static User login(String user, String pass) {
+        User u = userBean.get_user_by_username(user);
+        if (u != null) {
+            if (u.getPassword().equals(pass)) {
                 return u;
             }
         }
-        return null; 
+        return null;
     }
 
     private static MovieBeanLocal lookupMovieBeanLocal() {
@@ -157,30 +165,30 @@ public class MovieDB {
     
 
     public static int register(String user, String email, String pwd, String pwd2) {
-        System.out.println("pass: "+ pwd+" pass2: "+pwd2 );
-        if(!pwd.equals(pwd2)){
+        System.out.println("pass: " + pwd + " pass2: " + pwd2);
+        if (!pwd.equals(pwd2)) {
             return -1;
         }
-        if(!validate_email(email)){
+        if (!validate_email(email)) {
             return -2;
         }
-        User u= userBean.get_user_by_username(user);
-        if(u!=null){
+        User u = userBean.get_user_by_username(user);
+        if (u != null) {
             return -3;
         }
-        User new_user= new User();
-        new_user.setAvatar("/image/avatar/default.png");
+        User new_user = new User();
+        new_user.setAvatar("images/avatars/user2_avatar.png");
         new_user.setEmail(email);
         new_user.setPassword(pwd2);
         new_user.setUsername(user);
-        
+
         userBean.register_user(new_user);
         return 1;
     }
-    
-    private static boolean validate_email(String email){
+
+    private static boolean validate_email(String email) {
         Pattern ptr = Pattern.compile("(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*:(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)(?:,\\s*(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*))*)?;\\s*)");
-        return ptr.matcher(email).matches(); 
+        return ptr.matcher(email).matches();
     }
 
     public static Map<String, List<Movie>> get_user_lists(User u) {
@@ -201,10 +209,10 @@ public class MovieDB {
         }
         return user_lists;
     }
-    
-    public static List<Ratings> get_user_ratings(User u){
-        List<Ratings> user_ratings=ratingsBean.get_all_ratings_of_user(u.getId());
-        if(user_ratings!=null){
+
+    public static List<Ratings> get_user_ratings(User u) {
+        List<Ratings> user_ratings = ratingsBean.get_all_ratings_of_user(u.getId());
+        if (user_ratings != null) {
             Collections.reverse(user_ratings);
             return user_ratings;
         }
@@ -232,47 +240,59 @@ public class MovieDB {
     }
 
     public static List<Movie> list_top_rated_movies(int i) {
-        List<Movie> res= movieBean.list_top_rated_movies();
+        List<Movie> res = movieBean.list_top_rated_movies();
+        List<Movie> final_res = new ArrayList<>();
         Collections.reverse(res);
-        if(res.size()>i+20){
-            res=res.subList(i,i+20);
-        }else{
-            res=res.subList(i,i+res.size());
+        if (res.size() > i + 20) {
+            res = res.subList(i, i + 20);
+        } else {
+            res = res.subList(i, res.size());
         }
-        return res;
+        for (Movie m : res) {
+            if (m.getRating() > 0) {
+                final_res.add(m);
+            }
+        }
+        return final_res;
     }
 
     public static User get_user(String username) {
-        User u= userBean.get_user_by_username(username);
+        System.out.println("tentei ir buscar user");
+        User u = userBean.get_user_by_username(username);
+        if(u==null){
+            System.out.println("nao encontrou o user");
+        }
         return u;
     }
 
     public static List<Movie> list_user_list(int i, int id, String list_type) {
-        List<Lists> aux= listsBean.get_list(id,list_type);
-        List<Movie> res= new ArrayList<>();
-        for(Lists l:aux){
+        List<Lists> aux = listsBean.get_list(id, list_type);
+        List<Movie> res = new ArrayList<>();
+        for (Lists l : aux) {
             res.add(l.getMovie());
         }
-        
+
         Collections.sort(res, new Comparator<Movie>() {
-    public int compare(Movie one, Movie other) {
-        return one.getTitle().compareTo(other.getTitle());
-    }
-}); 
+            public int compare(Movie one, Movie other) {
+                return one.getTitle().compareTo(other.getTitle());
+            }
+        });
         //Collections.reverse(res);
-        if(res.size()>i+20){
-            res=res.subList(i,i+20);
-        }else{
-            res=res.subList(i,i+res.size());
+        if (res.size() > i + 20) {
+            res = res.subList(i, i + 20);
+        } else {
+            res = res.subList(i, res.size());
         }
         return res;
     }
 
     public static void remove_from_list(int user_id, int movie_id, String list_type) {
-        listsBean.remove_from_list(user_id,movie_id,list_type);
+        listsBean.remove_from_list(user_id, movie_id, list_type);
+        movieBean.clear();
+        userBean.clear();
     }
 
-    public static List<Staff> getMovieCast(String movieId){
+    public static List<Staff> getMovieCast(String movieId) {
         List<Staff> actors = new ArrayList<>();
         List<Movie_Staff> records = movieStaffBean.getMovieCast("movieId="+movieId,"staffId");
         for(Movie_Staff ms : records)
@@ -297,4 +317,79 @@ public class MovieDB {
             throw new RuntimeException(ne);
         }
     }
+        
+
+    public static Movie get_movie(String movie_name) {
+        return movieBean.getMovie(movie_name);
+    }
+
+    public static List<Movie> list_coming_soon_movies(int i) {
+        List<Movie> aux = movieBean.list_movies_by_year();
+        List<Movie> res = new ArrayList<>();
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int year = cal.get(Calendar.YEAR);
+        Collections.reverse(aux);
+        for (Movie m : aux) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, m.getRelease_year());
+            if (year < m.getRelease_year()) {
+                break;
+            }
+            calendar.set(Calendar.MONTH, m.getRelease_month() - 1);
+            calendar.set(Calendar.DATE, m.getRelease_day());
+            Date movie_date = calendar.getTime();
+            if (movie_date.after(today)) {
+                res.add(m);
+            }
+        }
+        if (res.size() > i + 20) {
+            res = res.subList(i, i + 20);
+        } else {
+            res = res.subList(i, res.size());
+        }
+        return res;
+    }
+
+    public static List<Movie> latest_releases(int i) {
+        List<Movie> aux = movieBean.list_movies_by_year();
+        List<Movie> res = new ArrayList<>();
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        Collections.reverse(aux);
+        for (Movie m : aux) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, m.getRelease_year());
+            calendar.set(Calendar.MONTH, m.getRelease_month() - 1);
+            calendar.set(Calendar.DATE, m.getRelease_day());
+            Date movie_date = calendar.getTime();
+            if (movie_date.before(today)) {
+                res.add(m);
+            }
+            if (res.size() == 54) {
+                break;
+            }
+        }
+        
+        Collections.sort(res, new Comparator<Movie>() {
+            public int compare(Movie one, Movie other) {
+                return other.getDate().compareTo(one.getDate());
+            }
+        });
+        
+        if (res.size() > i + 20) {
+            res = res.subList(i, i + 20);
+        } else {
+            res = res.subList(i, res.size());
+        }
+        return res;
+    }
+
+    public static void delete_list(String id, String list_name) {
+        System.out.println("cheguei a moviedb");
+       listsBean.remove_list(id,list_name);
+    }
+
 }

@@ -49,8 +49,20 @@ public class Website_List extends HttpServlet {
             u = MovieDB.get_user(username);
         }
         
+        switch (list_type){
+            case "Top Rated":
+                r= MovieDB.list_top_rated_movies(start_point);
+                break;
+            case "Coming Soon":
+                r=MovieDB.list_coming_soon_movies(start_point);
+                break;
+            case "Latest Releases":
+                r=MovieDB.latest_releases(start_point);
+                break;
+                
+        }
         //System.out.println("entrei");
-        r= MovieDB.list_top_rated_movies(start_point);
+        
         
         
         request.setAttribute("list", r);

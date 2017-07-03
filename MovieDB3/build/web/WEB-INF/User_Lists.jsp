@@ -4,6 +4,7 @@
     Author     : Utilizador
 --%>
 
+<%@page import="java.util.Random"%>
 <%@page import="moviedb_classes.Ratings"%>
 <%@page import="moviedb_classes.Movie"%>
 <%@page import="java.util.List"%>
@@ -49,10 +50,11 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <% String ref="LoginServlet?log_state=1&username="+u.getUsername();%>
+                    <a class="navbar-brand" href=<%=ref%>>
                         <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
                     </a>
-                    <a class="navbar-brand" href="#" style="padding-top:15px">
+                    <a class="navbar-brand" href="<%=ref%>" style="padding-top:15px">
                         MovieDB
                     </a>
                 </div>
@@ -73,14 +75,19 @@
                     </ul>
                     </li>
                     </ul>
-                    <form class="navbar-form" id="search">
-                        <div class="form-group" style="display:inline;">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search movie title">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <input type="hidden" name="user" value="<%=u.getId()%>" />
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
@@ -92,7 +99,7 @@
                 <% String list_name = request.getAttribute("list_name").toString();
                 System.out.println(list_name);
                 int bot_limit=(int) request.getAttribute("bot_limit");
-System.out.println(bot_limit);%>
+                System.out.println(bot_limit);%>
                     
                 <div class="col-md-10 col-md-offset-1">
 
@@ -101,6 +108,14 @@ System.out.println(bot_limit);%>
                             <div class="row">
                                 <div class="col col-xs-6">
                                     <h2 class="panel-title"><p><strong><%=list_name%></strong></p></h2>
+                                </div>
+                                <div class="pull-right" style="padding-right: 15px">
+                                <form method="POST" action="Remove_List_Servlet">
+                                    <input type="submit" name="delete" class="btn btn-default" value="Delete list">
+                                    <input type="hidden" name="userid" value="<%= u.getId()%>">
+                                    <input type="hidden" name="username" value="<%= u.getUsername()%>">
+                                    <input type="hidden" name="list_name" value="<%=list_name.replace(" ", "_")%>">
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -123,13 +138,14 @@ System.out.println(bot_limit);%>
                                         <td>
                                             <strong><%=start_point + 1%></strong>
                                         </td>
-                                        <td><a href="" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
-                                        <td><a href=""><%=m.getTitle()%></a> </td>
+                                        <td><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>" class="thumbnail small-poster"><img src=<%=m.getPoster()%> alt="Image"></a></td>
+                                        <td><a href="<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>"><%=m.getTitle()%></a> </td>
                                         <td><div class="star-ratings-css">
                                                 <div class="star-ratings-css"><span style="color: #000"><%=m.getRating()%>  <span style="color: #FF6701">★</span></span></div>
                                             </div>
                                         </td>
-                                        <% String ref= "RemoveEntryServlet?user_id="+u.getId()+"&movie_id="+m.getId()+"&list_name="+list_name.replaceAll(" ", "_")+"&user="+u.getUsername()+"&bot_limit="+bot_limit;%>
+                                        <% Random rn= new Random();%>
+                                        <% ref= "RemoveEntryServlet?user_id="+u.getId()+"&movie_id="+m.getId()+"&list_name="+list_name.replace(" ","_")+"&user="+u.getUsername()+"&bot_limit="+bot_limit;%>
                                         <td><a href=<%=ref%>>remove</a></td>
                                     </tr>
                                     <%start_point++;} %>
@@ -139,8 +155,15 @@ System.out.println(bot_limit);%>
                         </div>
                         <div class="panel-footer" style="text-align:center">
                             <div class="row">
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
-                               <a href="#"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                               <%if(bot_limit!=0){
+                               ref="User_Lists_Servlet?list_name="+list_name.replace(" ", "_")+"&bot_limit="+(bot_limit-20)+"&user="+u.getUsername();%>
+                                
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Previous 20</a>
+                               <%}%>
+                               <%if(!(movies.size()<20)){
+                               ref="User_Lists_Servlet?list_name="+list_name.replace(" ", "_")+"&bot_limit="+start_point+"&user="+u.getUsername();%>
+                               <a href="<%=ref%>"  class="btn btn-primary btn-lg" role="button" title="Click for more results" data-toggle="tooltip" data-placement="left">Next 20    </a> 
+                               <%}%>
                             </div>
                         </div>
                     </div>

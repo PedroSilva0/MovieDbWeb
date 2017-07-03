@@ -1,0 +1,146 @@
+<%-- 
+    Document   : Movie_Not_Found
+    Created on : 15/jun/2017, 15:54:17
+    Author     : Utilizador
+--%>
+
+<%@page import="moviedb_classes.Ratings"%>
+<%@page import="moviedb_classes.Movie"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@page import="moviedb_classes.User"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+
+        <title>MovieDB</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/user_lists.css" rel="stylesheet">
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="js/ie-emulation-modes-warning.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+          <![endif]-->
+
+    </head>
+    <body>
+
+        <% System.out.println("Entrei no jsp");
+            if(request.getAttribute("user")!=null){
+                System.out.println("entrei com user no JSP");
+            User u = (User) request.getAttribute("user");%>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                     <% String ref="LoginServlet?log_state=1&username="+u.getUsername();%>
+                     <a class="navbar-brand" href=<%=ref%>>
+                        <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
+                    </a>
+                    <a class="navbar-brand" href=<%=ref%> style="padding-top:15px">
+                        MovieDB
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <img class="img-circle" src=<%=u.getAvatar()%> >
+                        </li>
+                        <li><p class="navbar-text">Hello,</p></li>
+                        <li class="dropdown ">
+                            <a href="homepage_logeout" class="dropdown-toggle" data-toggle="dropdown"><b><%=u.getUsername()%></b> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                <li><a href="homepage_logedout">Log out</a></li>
+                        </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <input type="hidden" name="user" value="<%=u.getId()%>" />
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+                            <%}else{%>
+                            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="homepage_logedout">
+                            <img class="img-fluid" alt="MovieDB" src="images/logo.jpg" width="50" height="100">
+                        </a>
+                        <a class="navbar-brand" href="homepage_logedout" style="padding-top:15px">
+                            MovieDB
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <form method="POST" action="Login_Register_Page_Servlet" class="navbar-form navbar-right" >
+                            <input type="submit" name="login" class="btn btn-default" value="Login">
+                            <input type="submit" name="register" class="btn btn-default" value="Register">
+                        </form>
+                        <form method="POST" action="Search_Servlet" class="navbar-form" id="search">
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="movie_title" placeholder="Search movie title">
+                                    <span class="input-group-addon">
+                                    <button type="submit" class="submit-with-icon icon-button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+                            <%}%>
+
+        <div style="padding-top:100px;" class="container">
+            <div class="row">
+                <h2> Sorry we couldn't find the movie you wanted, please try another movie.</h2>
+                    <a id="back-to-top"  href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+            </div></div>
+
+
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="js/loged_in.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>
