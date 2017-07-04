@@ -16,6 +16,7 @@ import org.hibernate.CacheMode;
 import org.hibernate.FlushMode;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
+import org.orm.PersistentTransaction;
 
 /**
  *
@@ -52,8 +53,13 @@ public class RatingsBean implements RatingsBeanLocal {
     }
     
     public void saveRating(Ratings rating) {
+        PersistentSession session_aux=this.getSession();
         try {
+           PersistentTransaction t=session_aux.beginTransaction();
            RatingsDAO.save(rating);
+           t.commit();
+           session.flush();
+           session.clear();
        } catch (PersistentException ex) {
            System.out.println("Não registou");
        }

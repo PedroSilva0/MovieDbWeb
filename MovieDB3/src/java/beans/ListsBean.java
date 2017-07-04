@@ -17,8 +17,10 @@ import moviedb_classes.MovieDB2PersistentManager;
 import moviedb_classes.UserDAO;
 import org.hibernate.CacheMode;
 import org.hibernate.FlushMode;
+import org.hibernate.Transaction;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
+import org.orm.PersistentTransaction;
 
 /**
  *
@@ -80,16 +82,20 @@ public class ListsBean implements ListsBeanLocal {
     public void remove_from_list(int user_id, int movie_id, String list_type) {
             PersistentSession session_aux=this.getSession();
             List<Lists> r = null;
+            
          try {
+             PersistentTransaction t=session_aux.beginTransaction();
              System.out.println(list_type);
              r = ListsDAO.queryLists(session_aux,"userid="+user_id+"and list_name='"+list_type+"' and movieid="+movie_id, "userid");
              System.out.println("vou apagar");
              ListsDAO.delete(r.get(0));
+             t.commit();
              session.flush();
              session.clear();
          } catch (PersistentException ex) {
              System.out.println("delete falhou");
          }
+         
     }
 
     @Override
@@ -98,11 +104,13 @@ public class ListsBean implements ListsBeanLocal {
         PersistentSession session_aux=this.getSession();
             List<Lists> r = null;
          try {
+             PersistentTransaction t=session_aux.beginTransaction();
              r = ListsDAO.queryLists(session_aux,"userid="+id+"and list_name='"+list_name+"'", "userid");
              System.out.println("fui buscar lista");
              for(Lists l:r){
                  System.out.println("tentei apagar coisas");
                 ListsDAO.delete(l);
+                t.commit();
                 session.flush();
                 session.clear();
              }
@@ -116,7 +124,9 @@ public class ListsBean implements ListsBeanLocal {
     public void add_to_list(Lists l) {
         PersistentSession session_aux=this.getSession();
        try {
+           PersistentTransaction t=session_aux.beginTransaction();
            ListsDAO.save(l);
+           t.commit();
            //session.clear();
        } catch (PersistentException ex) {
            System.out.println("Não registou");
