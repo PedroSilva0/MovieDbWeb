@@ -182,7 +182,7 @@
                                     </div><!--.container-->
                                     <div class="container">
                                         <% ref="Website_List?list_name=Latest_Releases&bot_limit=0&user="+u.getUsername();%>
-                <h4 style="padding-top: 50px"> <a href="<%=ref%>">Coming Soon </a> </h4>
+                <h4 style="padding-top: 50px"> <a href="<%=ref%>">Latest Releases </a> </h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="Carousel2" class="carousel slide">
@@ -208,7 +208,7 @@
                                         Movie m = latest_movies.get(i);%>
                                         <div class="col-md-2"><a href=<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%> class="thumbnail"><img src=<%=m.getPoster()%> alt="Image" style=" height:250px; max-width:100%;"></a>
                                         <div class="caption">
-                                            <a href=<<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>>><%=m.getTitle()%></a>
+                                            <a href=<<%="/MovieDB3/movie_details?id="+m.getId()+"&user="+u.getId()%>><%=m.getTitle()%></a>
                                         </div>
                                         </div>
                                         

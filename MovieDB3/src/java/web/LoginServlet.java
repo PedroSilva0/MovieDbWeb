@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                 if (log_state == 1) {
                 User u= MovieDB.get_user(user);
                     request.setAttribute("user", u);
-                        List<Movie> r = MovieDB.list_all_movies();
+                        List<Movie> r = MovieDB.list_top_rated_movies();
                         List<Movie> c = MovieDB.list_coming_soon_movies();
                         List<Movie> l = MovieDB.latest_releases();
                         Map<String, List<Movie>> lists = MovieDB.get_user_lists(u);
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 
                     if (u != null) {
                         request.setAttribute("user", u);
-                        List<Movie> r = MovieDB.list_all_movies();
+                        List<Movie> r = MovieDB.list_top_rated_movies();
                         List<Movie> c = MovieDB.list_coming_soon_movies();
                         List<Movie> l = MovieDB.latest_releases();
                         Map<String, List<Movie>> lists = MovieDB.get_user_lists(u);

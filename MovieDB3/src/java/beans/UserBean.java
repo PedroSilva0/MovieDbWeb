@@ -13,8 +13,10 @@ import moviedb_classes.User;
 import moviedb_classes.UserDAO;
 import org.hibernate.CacheMode;
 import org.hibernate.FlushMode;
+import org.hibernate.Transaction;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
+import org.orm.PersistentTransaction;
 
 /**
  *
@@ -44,7 +46,9 @@ public class UserBean implements UserBeanLocal {
     public void register_user(User u) {
         PersistentSession session_aux=this.getSession();
        try {
+           PersistentTransaction t= session_aux.beginTransaction();
            UserDAO.save(u);
+           t.commit();
            //session.clear();
        } catch (PersistentException ex) {
            System.out.println("Não registou");
@@ -57,8 +61,6 @@ public class UserBean implements UserBeanLocal {
         if (session == null) {
             try {
                 session = MovieDB2PersistentManager.instance().getSession();
-                session.setFlushMode(FlushMode.ALWAYS);
-                session.setCacheMode(CacheMode.REFRESH);
             } catch (Exception e) {
                 e.printStackTrace();
             }

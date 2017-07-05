@@ -213,7 +213,9 @@
                                                                 <input class="form-control" type="text" name="list_name" placeholder="New list name">
                                                                 <input type="hidden" name="user_id" value="<%=u.getId()%>">
                                                                 <input type="hidden" name="movie_id" value="<%=movie.getId()%>">
+                                                                
                                                                 <button type="submit" name="add" class="btn btn-default" value="Add">Add</button>
+                                                               
                                                             </div>
                                                         </div>
 

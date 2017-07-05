@@ -49,7 +49,7 @@ public class MovieBean implements MovieBeanLocal {
             r = MovieDAO.queryMovie(session_aux,"id>0", "rating");
             
         } catch (Exception e) {
-            System.out.println("didnt get any movies");
+            System.out.println("didnt get any movies top");
         }
         return r;
     }
@@ -62,7 +62,7 @@ public class MovieBean implements MovieBeanLocal {
             r = MovieDAO.queryMovie(session_aux,"id>0", "release_year");
             
         } catch (Exception e) {
-            System.out.println("didnt get any movies");
+            System.out.println("didnt get any movies year");
         }
         return r;
     }
@@ -87,7 +87,7 @@ public class MovieBean implements MovieBeanLocal {
             r = MovieDAO.queryMovie(session_aux,"title='"+movie_name+"'", "id");
             
         } catch (Exception e) {
-            System.out.println("didnt get any movies");
+            System.out.println("didnt get any movies a movie");
         }
         if(r.size()!=0){
             return r.get(0);

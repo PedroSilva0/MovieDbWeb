@@ -135,6 +135,9 @@ public class MovieDB {
 
     public static User login(String user, String pass) {
         User u = userBean.get_user_by_username(user);
+        if(u!=null){
+            System.out.println("user no login buscado com sucesso");
+        }
         if (u != null) {
             if (u.getPassword().equals(pass)) {
                 return u;

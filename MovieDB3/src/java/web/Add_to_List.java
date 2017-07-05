@@ -37,10 +37,12 @@ public class Add_to_List extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String user_id = request.getParameter("user_id");
+        System.out.println(user_id);
         String movie_id=request.getParameter("movie_id");
+        System.out.println(movie_id);
         String list_name=request.getParameter("list_name").replace("_"," ");
+        System.out.println(list_name);
         MovieDB.add_to_list(user_id,movie_id,list_name);
         request.getRequestDispatcher("movie_details?user="+user_id+"&id="+movie_id).forward(request, response);
     }

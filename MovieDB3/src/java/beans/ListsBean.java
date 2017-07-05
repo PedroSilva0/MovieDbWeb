@@ -90,8 +90,6 @@ public class ListsBean implements ListsBeanLocal {
              System.out.println("vou apagar");
              ListsDAO.delete(r.get(0));
              t.commit();
-             session.flush();
-             session.clear();
          } catch (PersistentException ex) {
              System.out.println("delete falhou");
          }
@@ -111,8 +109,6 @@ public class ListsBean implements ListsBeanLocal {
                  System.out.println("tentei apagar coisas");
                 ListsDAO.delete(l);
                 t.commit();
-                session.flush();
-                session.clear();
              }
              
          } catch (PersistentException ex) {
